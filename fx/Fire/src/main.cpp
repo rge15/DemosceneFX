@@ -16,26 +16,40 @@ int main()
 	ptc_open("window", WIDTH_SCREEN, HEIGHT_SCRREN);
 
 	uint32_t i = 0;
-	uint32_t j = WIDTH_SCREEN * (HEIGHT_SCRREN - 10) ; 
-	uint32_t* _ptrScreen = _screen;
+	uint32_t j = WIDTH_SCREEN * (HEIGHT_SCRREN - 1); 
+	uint32_t* _ptrScreen = _screen + TOTAL_PIXELS - 1;
 	for(;;)
 	{
 
-		for( i = 0; i < j ; i++)
+		for(i = TOTAL_PIXELS ; i > j ; i--)
 		{
-			// _screen[i] = 0x0000FF00;
-			*_ptrScreen = rand();
+			uint32_t rngVal = rand();
+			*_ptrScreen = ((rngVal%122 + 122) << 16 ) + ((rngVal%122) << 8) ;
 
-			++_ptrScreen;
+			--_ptrScreen;
 		};
 
-		for( ; i < TOTAL_PIXELS ; i++)
+		for(; i > 0 ; i--)
 		{
-			*_ptrScreen = rand();
-			++_ptrScreen;
+			uint32_t rngVal = rand();
+
+			auto moduleResult = i%WIDTH_SCREEN;
+			if( moduleResult == 0 )
+			{
+				*_ptrScreen = ((rngVal%122 + 122) << 8 ) + (rngVal%122) ;
+			}else if ( moduleResult == 1)
+			{
+				*_ptrScreen = ((rngVal%122 + 122) << 8 ) + (rngVal%122) ;
+			}else
+			{
+				*_ptrScreen = (rngVal%122) ;
+			}
+			
+
+			--_ptrScreen;
 		};
 
-		_ptrScreen = _screen;
+		_ptrScreen = _screen + TOTAL_PIXELS - 1;
 		ptc_update( _screen );
 	}
 
