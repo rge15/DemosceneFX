@@ -24,50 +24,49 @@ int main()
 		//! BASE LINES VALUE
 		for(i = TOTAL_PIXELS ; i > j ; i--)
 		{
+			//GET RANDOM VALUE
 			uint32_t rngVal = rand();
 
+			//Sets a random default value on RED Channel
 			*_ptrScreen = (rngVal%255) << 16;
 
-			// if(rngVal%3 == 1)
-				// *_ptrScreen = ((rngVal%122+122) << 16) + ((rngVal%255) << 8);
+			//Handler of variation for one randmo Color Value   
+			uint8_t variationColour = 200;
+			//Some random value for setting a higher Color Value   
+			if(rngVal%3 == 1)
+				*_ptrScreen = (rngVal%55 + variationColour) << 16;
 
-			if(rngVal%30 == 1)
+			//Also randomly we set a 0 Color Value 
+			if(rngVal%9 == 1)
 				*_ptrScreen = 0;
 
+			//We pass inte the prev pixel to set value
 			--_ptrScreen;
 		};
 
-		_ptrScreen = _screen + TOTAL_PIXELS - WIDTH_SCREEN;
+		//We set the screen pointer to the penultimate last row for setting the values to the next row 
+		_ptrScreen = _screen + TOTAL_PIXELS - 1 - WIDTH_SCREEN;
 
+		//Fire color value
+		uint32_t  fireValue { 0 };
 		//!	FIRE DISPERSION MATHS
 		for( ; i > WIDTH_SCREEN ; i--)
 		{
 
+			//We get the pointers to the around pixels
 			uint32_t* prev = _ptrScreen-1;
 			uint32_t* next = _ptrScreen+1;
 			uint32_t* above = _ptrScreen-WIDTH_SCREEN;
 
+			//And their value
 			uint32_t prevVal = *prev;
 			uint32_t nextVal = *next;
 			uint32_t aboveVal = *above;
 			uint32_t thisVal = *_ptrScreen;
 
-			uint32_t  fireValue { 0 };
-
-			auto moduleResult = i%WIDTH_SCREEN;
-			if( moduleResult == 0 ) //RIGHT BAND SCREEN
-			{
-				fireValue = thisVal + prevVal + aboveVal;
-				fireValue /= 3;
-			}else if ( moduleResult == 1) //LEFT BAND SCREEN
-			{
-				fireValue = thisVal + nextVal + aboveVal;
-				fireValue /= 3;
-			}else //MIDDLE SCREEN
-			{
-				fireValue = thisVal + prevVal + aboveVal + nextVal ;
-				fireValue >>= 2;
-			}
+			//We add all the around values and we divide by the number of value
+			fireValue = thisVal + prevVal + aboveVal + nextVal ;
+			fireValue >>= 2;
 
 			//! COLOR VARIATION
 			//?VARIANT I?
