@@ -49,7 +49,7 @@ int main()
 	int uvx, uvy;
 	uint32_t timeInx{0}, timeIny{0};
 	
-	uint32_t lenght;
+	uint32_t mod1, mod2, remapUVx, remapUVy;
 	int value, valueR, valueG ;
 
 	init();
@@ -61,25 +61,32 @@ int main()
 
 		for( i = 0; i< HEIGHT_SCRREN; i++)
 		{
-			uvy = i + timeIny;
+			uvy = (i * 0.5) + timeIny;
 			uvy %= HEIGHT_SCRREN;
-			auto remapValY = (uint32_t)remap(uvy, HEIGHT_SCRREN, 512 );
+			remapUVy = (uint32_t)remap(uvy, HEIGHT_SCRREN, 512 );
 
 			for( j = 0; j < WIDTH_SCREEN; j++)
 			{
-				uvx =  (j * 5.) + timeInx;
+				//TODO : Mañana tengo que revisar todo el efecto y tener en cuenta que en el shadertoy
+				//TODO : Todos los usos de UV estan noramlizados de -1 a 1
+				//TODO : Crear una variable mapeada de -1 a 1 puede ayudar
+				uvx =  (j << 2) + timeInx;
 				uvx %= WIDTH_SCREEN;
-				
-				lenght = (uvx << 1) + (uvy << 1);
-				lenght *= 1/lenght;
-				lenght -= timeInx;
-				lenght %= 512;
 
-				auto remapValX = (uint32_t)remap(uvx, WIDTH_SCREEN, 512 );
+				remapUVx = (uint32_t)remap(uvx, WIDTH_SCREEN, 512 );
 
-				value = max(_sinus[remapValX] + _sinus[remapValY] + _sinus[lenght],0);
+				mod1 = uvx * uvx  + uvy * uvy;
+				mod1 *= 1/mod1;
+				mod1 -= timeInx;
+				mod1 %= 512;
 
-				value /= 3;
+				value = max(_sinus[remapUVx] + _sinus[remapUVy] + _sinus[mod1],0);
+				value >>= 2;
+
+				uint32_t cx = uvx * 0.5 * _sinus[timeInx%512];
+				uint32_t cy = uvy * 0.5 * _sinus[timeIny%512];
+
+				value = (cx*cx)%512;
 
 				valueR = _sinus[value];
 
