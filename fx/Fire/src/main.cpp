@@ -2,7 +2,6 @@ extern "C"
 {
 	#include <tinyptc.h>
 }
-#include <cstdlib>
 #include <cstdint>
 
 #define WIDTH_SCREEN 720

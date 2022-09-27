@@ -33,4 +33,7 @@ obj
 *.app
 fire
 
+# VSCode files
+.vscode
+
 
