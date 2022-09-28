@@ -3,12 +3,24 @@
 ############################
 APP 	:= fire
 CC 		:= g++
-CCFLAGS := -Wall -pedantic -std=c++20 -g
+CCFLAGS := -Wall -pedantic -std=c++20
 C		:= gcc
 CFLAGS 	:=
 LIBDIR  := ../lib/
 LIBS 	:= -lX11 -lXext $(LIBDIR)tinyPTCua/libTinyPtc.a
 INCDIRS := -I$(LIBDIR)tinyPTCua/src
+
+ifndef config
+	config=DEBUG
+endif
+
+ifeq ($(config),DEBUG)
+	CCFLAGS += -g
+else ifeq ($(config),RELEASE)
+	CCFLAGS += -o3
+else
+$(error "Invalid configuration $(config)")
+endif
 
 .PHONY: info
 
