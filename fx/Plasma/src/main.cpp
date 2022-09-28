@@ -46,11 +46,11 @@ int main()
 	uint32_t j { 0 };
 	uint32_t* _ptrScreen = _screen + TOTAL_PIXELS - 1;
 
-	int uvx, uvy;
+	int uvx, uvy, uvxtimed, uvytimed;
 	uint32_t timeInx{0}, timeIny{0};
 	
-	uint32_t mod1, mod2, remapUVx, remapUVy;
-	int value, valueR, valueG ;
+	uint32_t mod1, mod2, remapUVx, remapUVy, remapUVxtimed, remapUVytimed;
+	int value, valueR{0}, valueG {0} ;
 
 	init();
 
@@ -61,44 +61,59 @@ int main()
 
 		for( i = 0; i< HEIGHT_SCRREN; i++)
 		{
-			uvy = (i * 0.5) + timeIny;
+			uvy = i - HEIGHT_SCRREN/2;
+			uvytimed = i + timeIny;
+			
 			uvy %= HEIGHT_SCRREN;
+			uvytimed %= HEIGHT_SCRREN;
+
 			remapUVy = (uint32_t)remap(uvy, HEIGHT_SCRREN, 512 );
+			remapUVytimed = (uint32_t)remap(uvytimed, HEIGHT_SCRREN, 512 );
 
 			for( j = 0; j < WIDTH_SCREEN; j++)
 			{
-				//TODO : Mañana tengo que revisar todo el efecto y tener en cuenta que en el shadertoy
-				//TODO : Todos los usos de UV estan noramlizados de -1 a 1
-				//TODO : Crear una variable mapeada de -1 a 1 puede ayudar
-				uvx =  (j << 2) + timeInx;
+				uvx =  j - WIDTH_SCREEN/2;
+				uvxtimed = (j << 2) + timeInx;
+				
 				uvx %= WIDTH_SCREEN;
+				uvxtimed %= WIDTH_SCREEN;
+				
+				int lengthUV = sqrt(uvx*uvx+uvy*uvy);
+				int maxLengthScreen = sqrt((HEIGHT_SCRREN/2)*(HEIGHT_SCRREN/2)+(WIDTH_SCREEN/2)*(WIDTH_SCREEN/2));
+				lengthUV += timeInx + lengthUV;
+				lengthUV %= maxLengthScreen;
+
+				lengthUV = remap(lengthUV, maxLengthScreen, 512);
 
 				remapUVx = (uint32_t)remap(uvx, WIDTH_SCREEN, 512 );
+				remapUVxtimed = (uint32_t)remap(uvxtimed, WIDTH_SCREEN, 512 );
 
 				mod1 = uvx * uvx  + uvy * uvy;
 				mod1 *= 1/mod1;
 				mod1 -= timeInx;
 				mod1 %= 512;
 
-				value = max(_sinus[remapUVx] + _sinus[remapUVy] + _sinus[mod1],0);
+				//? GOOD VARIATION
+				// value = abs(_sinus[remapUVxtimed] + _sinus[remapUVytimed] + _sinus[mod1] + _sinus[lengthUV]);
+				value = max(_sinus[remapUVxtimed] + _sinus[remapUVytimed] + _sinus[mod1] + _sinus[lengthUV],0);
 				value >>= 2;
 
-				uint32_t cx = uvx * 0.5 * _sinus[timeInx%512];
-				uint32_t cy = uvy * 0.5 * _sinus[timeIny%512];
+				value %= 512;
 
-				value = (cx*cx)%512;
-
-				valueR = _sinus[value];
+				valueR = max(_sinus[value],0);
+				valueG = max(_sinus[((value+384)%512)],0);
 
 				value = valueR;
-				value <<= 16;
+				value <<= 8;
+				value += valueG;
+				value <<= 8;
 
 				_screen[i*WIDTH_SCREEN+j] = value;
 			}
 		}
 
 		timeInx += 2;
-		timeIny += 1;
+		timeIny += 3;
 
 		ptc_update( _screen );
 	}
