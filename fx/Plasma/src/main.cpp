@@ -44,13 +44,14 @@ int main()
 
 	uint32_t i { 0 };
 	uint32_t j { 0 };
-	uint32_t* _ptrScreen = _screen + TOTAL_PIXELS - 1;
 
 	int uvx, uvy, uvxtimed, uvytimed;
 	uint32_t timeInx{0}, timeIny{0};
 	
-	uint32_t mod1, mod2, remapUVx, remapUVy, remapUVxtimed, remapUVytimed;
+	uint32_t mod1, mod2, remapUVxtimed, remapUVytimed;
 	int value, valueR{0}, valueG {0} ;
+
+	int maxDistScreen = sqrt((HEIGHT_SCRREN/2)*(HEIGHT_SCRREN/2)+(WIDTH_SCREEN/2)*(WIDTH_SCREEN/2));
 
 	init();
 
@@ -67,25 +68,22 @@ int main()
 			uvy %= HEIGHT_SCRREN;
 			uvytimed %= HEIGHT_SCRREN;
 
-			remapUVy = (uint32_t)remap(uvy, HEIGHT_SCRREN, 512 );
 			remapUVytimed = (uint32_t)remap(uvytimed, HEIGHT_SCRREN, 512 );
 
 			for( j = 0; j < WIDTH_SCREEN; j++)
 			{
-				uvx =  j - WIDTH_SCREEN/2;
+				uvx =  j - WIDTH_SCREEN/3;
 				uvxtimed = (j << 2) + timeInx;
 				
 				uvx %= WIDTH_SCREEN;
 				uvxtimed %= WIDTH_SCREEN;
 				
-				int lengthUV = sqrt(uvx*uvx+uvy*uvy);
-				int maxLengthScreen = sqrt((HEIGHT_SCRREN/2)*(HEIGHT_SCRREN/2)+(WIDTH_SCREEN/2)*(WIDTH_SCREEN/2));
-				lengthUV += timeInx + lengthUV;
-				lengthUV %= maxLengthScreen;
+				mod2 = sqrt(uvx*uvx+uvy*uvy);
+				mod2 += timeInx + mod2;
+				mod2 %= maxDistScreen;
 
-				lengthUV = remap(lengthUV, maxLengthScreen, 512);
+				mod2 = remap(mod2, maxDistScreen, 512);
 
-				remapUVx = (uint32_t)remap(uvx, WIDTH_SCREEN, 512 );
 				remapUVxtimed = (uint32_t)remap(uvxtimed, WIDTH_SCREEN, 512 );
 
 				mod1 = uvx * uvx  + uvy * uvy;
@@ -94,8 +92,8 @@ int main()
 				mod1 %= 512;
 
 				//? GOOD VARIATION
-				// value = abs(_sinus[remapUVxtimed] + _sinus[remapUVytimed] + _sinus[mod1] + _sinus[lengthUV]);
-				value = max(_sinus[remapUVxtimed] + _sinus[remapUVytimed] + _sinus[mod1] + _sinus[lengthUV],0);
+				// value = abs(_sinus[remapUVxtimed] + _sinus[remapUVytimed] + _sinus[mod1] + _sinus[mod2]);
+				value = max(_sinus[remapUVxtimed] + _sinus[remapUVytimed] + _sinus[mod1] + _sinus[mod2],0);
 				value >>= 2;
 
 				value %= 512;
@@ -107,6 +105,7 @@ int main()
 				value <<= 8;
 				value += valueG;
 				value <<= 8;
+				// value += max(_sinus[(j+timeInx)%512],0);
 
 				_screen[i*WIDTH_SCREEN+j] = value;
 			}
