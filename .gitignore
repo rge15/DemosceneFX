@@ -32,6 +32,7 @@ obj
 *.out
 *.app
 fire
+plasma
 
 # VSCode files
 .vscode
