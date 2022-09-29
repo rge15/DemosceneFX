@@ -58,10 +58,10 @@ int main()
 	for(;;)
 	{
 		//TODO : Ver de ralentizar la velocidad de las bolas
-		p1x = WIDTH_SCREEN/2 + (_sinus[time]) ;
-		p1y = HEIGHT_SCRREN/2 + (_sinus[time]);
+		p1x = WIDTH_SCREEN/2 + (_sinus[(time>>2)%512]);
+		p1y = HEIGHT_SCRREN/2 + (_sinus[(time/3)%512]);
 
-		p2x = WIDTH_SCREEN/2 - (_sinus[(time+318)%512]) ;
+		p2x = WIDTH_SCREEN/2 - (_sinus[((time+318)>>2)%512]);
 		p2y = HEIGHT_SCRREN/2 + (_sinus[(time+318)%512]);
 
 
@@ -73,9 +73,13 @@ int main()
 				uvx = j;
 				length = sqrt((uvx-p1x)*(uvx-p1x)+(uvy-p1y)*(uvy-p1y));
 				length ^= (uint32_t)sqrt((uvx-p2x)*(uvx-p2x)+(uvy-p2y)*(uvy-p2y));
-				// length >>= 5;
-				// length &= 1;
-				length &= 255;
+				//?Variation I?
+				length >>= 5;
+				length &= 1;
+				length *= 255;
+				
+				//?Variation II?
+				// length &= 255;
 
 				finalCol = (length << 16) + (length << 8) + length;
 
@@ -85,7 +89,6 @@ int main()
 		}
 
 		++time;
-		time %= 512;
 		ptc_update( _screen );
 	}
 
