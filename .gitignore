@@ -33,6 +33,7 @@ obj
 *.app
 fire
 plasma
+moire
 
 # VSCode files
 .vscode

@@ -78,6 +78,8 @@ int main()
 				uvx %= WIDTH_SCREEN;
 				uvxtimed %= WIDTH_SCREEN;
 				
+				//TODO : Hacer que el punto se mueva
+
 				mod2 = sqrt(uvx*uvx+uvy*uvy);
 				mod2 += timeInx + mod2;
 				mod2 %= maxDistScreen;
@@ -94,7 +96,8 @@ int main()
 				//? GOOD VARIATION
 				// value = abs(_sinus[remapUVxtimed] + _sinus[remapUVytimed] + _sinus[mod1] + _sinus[mod2]);
 				value = max(_sinus[remapUVxtimed] + _sinus[remapUVytimed] + _sinus[mod1] + _sinus[mod2],0);
-				value >>= 2;
+				
+				value >>= 1;
 
 				value %= 512;
 

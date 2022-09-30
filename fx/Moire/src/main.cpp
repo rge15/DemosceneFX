@@ -70,16 +70,18 @@ int main()
 			uvy = i;
 			for(j = 0; j < WIDTH_SCREEN; j++)
 			{
+				//TODO : Hacer que las bandas se muevan hacia el centro de los puntos
+
 				uvx = j;
 				length = sqrt((uvx-p1x)*(uvx-p1x)+(uvy-p1y)*(uvy-p1y));
 				length ^= (uint32_t)sqrt((uvx-p2x)*(uvx-p2x)+(uvy-p2y)*(uvy-p2y));
 				//?Variation I?
-				length >>= 5;
-				length &= 1;
-				length *= 255;
+				// length >>= 5;
+				// length &= 1;
+				// length *= 255;
 				
 				//?Variation II?
-				// length &= 255;
+				length &= 255;
 
 				finalCol = (length << 16) + (length << 8) + length;
 
