@@ -45,8 +45,8 @@ int main()
 	uint32_t i { 0 };
 	uint32_t j { 0 };
 
-	int uvx, uvy, uvxtimed, uvytimed;
-	uint32_t timeInx{0}, timeIny{0};
+	int uvx, uvy, uvy2, uvxtimed, uvytimed;
+	uint32_t timeInx{0}, timeIny{0}, time{0};
 	
 	uint32_t mod1, mod2, remapUVxtimed, remapUVytimed;
 	int value, valueR{0}, valueG {0} ;
@@ -63,6 +63,8 @@ int main()
 		for( i = 0; i< HEIGHT_SCRREN; i++)
 		{
 			uvy = i - HEIGHT_SCRREN/2;
+			uvy2 = i + _sinus[(time+318)%512];
+
 			uvytimed = i + timeIny;
 			
 			uvy %= HEIGHT_SCRREN;
@@ -78,9 +80,13 @@ int main()
 				uvx %= WIDTH_SCREEN;
 				uvxtimed %= WIDTH_SCREEN;
 				
-				//TODO : Hacer que el punto se mueva
+				mod1 = uvx * uvx  + uvy * uvy;
+				mod1 *= 1/mod1;
+				mod1 -= timeInx;
+				mod1 %= 512;
 
-				mod2 = sqrt(uvx*uvx+uvy*uvy);
+				uvx += _sinus[(time)%512];
+				mod2 = sqrt(uvx*uvx+uvy2*uvy2);
 				mod2 += timeInx + mod2;
 				mod2 %= maxDistScreen;
 
@@ -88,14 +94,9 @@ int main()
 
 				remapUVxtimed = (uint32_t)remap(uvxtimed, WIDTH_SCREEN, 512 );
 
-				mod1 = uvx * uvx  + uvy * uvy;
-				mod1 *= 1/mod1;
-				mod1 -= timeInx;
-				mod1 %= 512;
-
 				//? GOOD VARIATION
 				// value = abs(_sinus[remapUVxtimed] + _sinus[remapUVytimed] + _sinus[mod1] + _sinus[mod2]);
-				value = max(_sinus[remapUVxtimed] + _sinus[remapUVytimed] + _sinus[mod1] + _sinus[mod2],0);
+				value = max( _sinus[remapUVxtimed] + _sinus[remapUVytimed] + _sinus[mod1] + _sinus[mod2],0);
 				
 				value >>= 1;
 
@@ -116,6 +117,7 @@ int main()
 
 		timeInx += 2;
 		timeIny += 3;
+		time +=1;
 
 		ptc_update( _screen );
 	}
