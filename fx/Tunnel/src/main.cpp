@@ -28,8 +28,8 @@ void init()
 		for(int x {0}; x < WIDTH_SCREEN; x++)
 		{
 			dx = (x - WIDTH_SCREEN / 2);
-			distance[y*WIDTH_SCREEN + x] = int(ratio * heightText / sqrt( dy*dy + dx*dx )) % heightText;
-			angle[y*WIDTH_SCREEN + x] = 0.5 * widthText * (atan2( dy, dx )/ PI );
+			distance[y*WIDTH_SCREEN + x] = int( ratio * heightText / sqrt( dy*dy + dx*dx ) )%heightText;
+			angle[y*WIDTH_SCREEN + x] = 0.5 * widthText * (atan2( dy, dx )/ PI  );
 		}
 	}
 }
@@ -57,8 +57,8 @@ int main()
 
 	for(;;)
 	{ 
-		shiftx = widthText ;//* 1 * time * 5/1000;
-		shifty = heightText ;//* 0.25 * time * 5/1000;
+		shiftx = widthText * 1 * time * 1/1000;
+		shifty = heightText * 0.25 * time * 1/1000;
 
 		for(i = 0; i < HEIGHT_SCRREN; i++)
 		{
