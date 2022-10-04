@@ -1,14 +1,12 @@
 #include "Sprite.hpp"
 
-Sprite::Sprite( const char* p_fileSrc, uint32_t p_width, uint32_t p_height ) noexcept
-: _width { p_width }, _height { p_height }
+Sprite::Sprite( std::string p_fileSrc ) noexcept
 {
-	FILE* spriteData = std::fopen( "img/readBin.data" , "rb" );
+	std::ifstream file ( p_fileSrc, std::ios::binary);
 
-	ASSERT(spriteData, "Error opening the img for the sprite")
+	ASSERT(file.is_open(), "Error opening the img for the sprite")
 
-	_data.resize(_width*_height);
-	fillSpriteData(spriteData);
+	fillSpriteData( file );
 }
 
 //-----------------------------------------------------------------------------
@@ -20,32 +18,25 @@ Sprite::~Sprite() noexcept
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 
-void Sprite::fillSpriteData(FILE* p_spriteData) noexcept
+void Sprite::fillSpriteData(std::ifstream& p_spriteData) noexcept
 {
-	int dataByte, color, i{ 0 }, counterData{ 0 };
+	std::vector<unsigned char> pixels {};
+	unsigned long width {0}, height {0};
 
-	uint32_t* ptrArrayData = &_data[0];
+	std::vector<unsigned char> fileData{
+		std::istreambuf_iterator<char> {p_spriteData},
+		std::istreambuf_iterator<char> {}
+	};
 
-	while( (dataByte = std::fgetc(p_spriteData)) != EOF )
-	{
-		color += dataByte;
+	decodePNG( pixels, width, height, fileData.data(), fileData.size());
 
-		//Each 3 bytes of data is new value for the array
-		if(i == 2)
-		{
-			*ptrArrayData = color;
-			++ptrArrayData;
-			color = 0;
-			i = 0;
-			++counterData;
-		}
-		else
-		{
-			color <<= 8;
-			++i;
-		}
-	}
+	ASSERT( (width<=UINT32_MAX) , "Width of png greater than posible")
+	ASSERT( (height<=UINT32_MAX) , "Height of png greater than posible")
+	
+	_width = width;
+	_height = height;
 
-	ASSERT(counterData == _width*_height, "The sprite has different size from the dimensions specified")
+	_data.reserve( pixels.size()>>2 );
+	memcpy( _data.data(), pixels.data(), pixels.size());
 }
 

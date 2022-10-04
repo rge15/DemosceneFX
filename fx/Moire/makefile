@@ -7,8 +7,8 @@ CCFLAGS := -Wall -pedantic -std=c++20 -g
 C		:= gcc
 CFLAGS 	:=
 LIBDIR  := ../lib/
-LIBS 	:= -lX11 -lXext $(LIBDIR)tinyPTCua/libTinyPtc.a
-INCDIRS := -I$(LIBDIR)tinyPTCua/src
+LIBS 	:= -lX11 -lXext $(LIBDIR)tinyPTCua/libTinyPtc.a $(LIBDIR)picoPNGua/libPicoPng.a
+INCDIRS := -I$(LIBDIR)tinyPTCua/src -I$(LIBDIR)picoPNGua/src
 
 ifndef config
 	config=DEBUG

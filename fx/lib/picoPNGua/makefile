@@ -1,27 +1,11 @@
 ############################
 #### MAKE VARS
 ############################
-APP 	:= sprite
+LIB 	:= libPicoPng.a
 CC 		:= g++
 CCFLAGS := -Wall -pedantic -std=c++20 -g
 C		:= gcc
 CFLAGS 	:=
-LIBDIR  := ../lib/
-LIBS 	:= -lX11 -lXext $(LIBDIR)tinyPTCua/libTinyPtc.a $(LIBDIR)picoPNGua/libPicoPng.a
-INCDIRS := -I$(LIBDIR)tinyPTCua/src -I$(LIBDIR)picoPNGua/src
-
-ifndef config
-	config=DEBUG
-endif
-
-ifeq ($(config),DEBUG)
-	CCFLAGS += -g
-else ifeq ($(config),RELEASE)
-	CCFLAGS += -o3
-else
-$(error "Invalid configuration $(config)")
-endif
-
 
 .PHONY: info
 
@@ -29,7 +13,9 @@ endif
 #### INSTRUCTIONS DATA
 ############################
 MKDIR 	:= mkdir -p
-MKLIB 	:= ar rcs
+AR	 	:= ar
+ARFLAGS	:= -crs
+RANLIB	:= ranlib
 
 ############################
 #### DIRECTORI DATA
@@ -72,12 +58,13 @@ OBJDIRS := $(patsubst $(SRC)%,$(OBJ)%,$(SRCDIRS))
 ############################
 #### MAKEFILE RULES
 ############################
-$(APP) : $(OBJDIRS) $(ALLOBJS)
-	$(CC) -o $(APP) $(ALLOBJS) $(LIBS)
+$(LIB) : $(OBJDIRS) $(ALLOBJS)
+	$(AR) $(ARFLAGS) $(LIB) $(ALLOBJS)
+	$(RANLIB) $(LIB)
 
-$(foreach F,$(ALLCPPS),$(eval $(call COMPILE,$(F),$(call C20,$(F)),$(call C2H,$(F)),$(CC),$(CCFLAGS) $(INCDIRS))))
+$(foreach F,$(ALLCPPS),$(eval $(call COMPILE,$(F),$(call C20,$(F)),$(call C2H,$(F)),$(CC),$(CCFLAGS))))
 
-$(foreach F,$(ALLCS),$(eval $(call COMPILE,$(F),$(call C20,$(F)),$(call C2H,$(F)),$(C),$(CFLAGS) $(INCDIRS))))
+$(foreach F,$(ALLCS),$(eval $(call COMPILE,$(F),$(call C20,$(F)),$(call C2H,$(F)),$(C),$(CFLAGS))))
 
 $(OBJDIRS) :
 	$(shell $(MKDIR) $(OBJDIRS))
@@ -88,7 +75,6 @@ info :
 	$(info $(ALLCS))
 	$(info $(ALLCPPS))
 	$(info $(ALLOBJS))
-	$(info $(LIBS))
 
 clean :
 	rm -rf $(OBJDIRS)

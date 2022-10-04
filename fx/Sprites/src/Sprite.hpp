@@ -1,6 +1,9 @@
 #include <cstdint>
 #include <iostream>
 #include <vector>
+#include <fstream>
+#include <picopng.hpp>
+#include <cstring>
 #include "asserts.hpp"
 
 class Sprite
@@ -13,9 +16,10 @@ class Sprite
 		uint32_t _posX, _posY;
 
 	public:
-		Sprite( const char* p_fileSrc, uint32_t p_width, uint32_t p_height) noexcept;
+		
+		Sprite( std::string p_fileSrc ) noexcept;
 
 		~Sprite() noexcept;
 
-		void fillSpriteData(FILE* p_spriteData) noexcept;
+		void fillSpriteData(std::ifstream& p_spriteData) noexcept;
 };

@@ -52,11 +52,10 @@ int main()
 
 	uint32_t* _ptrScreen = _screen;
 
-	Sprite spr1("img/readBin.data",2,2);
+	Sprite spr1("img/prueba.png");
 
 	for(;;)
 	{
-
 		//TODO : Esto es como dibujar un sprite en pantalla limpiarlo y dejarlo bonico
 		for(i=0; i < spr1._height; i++)
 		{
@@ -65,7 +64,6 @@ int main()
 				_screen[i*WIDTH_SCREEN+j] = spr1._data[i*spr1._width+j];
 			}
 		}
-
 		++time;
 		ptc_update( _screen );
 	}
