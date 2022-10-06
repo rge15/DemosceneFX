@@ -7,17 +7,16 @@ extern "C"
 #include <iostream>
 #include "Sprite.hpp"
 
-#define PI 3.14159265359 
-#define WIDTH_SCREEN 720
-#define HEIGHT_SCRREN 480
-#define TOTAL_PIXELS ( WIDTH_SCREEN * HEIGHT_SCRREN )  
+constexpr float PI = 3.14159265359;
+constexpr int WIDTH_SCREEN = 720;
+constexpr int HEIGHT_SCRREN = 480;
+constexpr int TOTAL_PIXELS = WIDTH_SCREEN * HEIGHT_SCRREN;  
 
 uint32_t _screen[TOTAL_PIXELS];
-int distance[TOTAL_PIXELS];
-//Para ahorrar memoria alomejor el de angles se puede hacer mucho más pequeño y normalizar los valores, aunque se quede un poco más feo
-int angle[TOTAL_PIXELS];
-float shade[TOTAL_PIXELS];
-int widthText, heightText;
+int distance[TOTAL_PIXELS*4];
+int angle[TOTAL_PIXELS*4];
+float shade[TOTAL_PIXELS*4];
+int widthText = 0, heightText = 0;
 
 int min( int a, int b)
 {
@@ -28,18 +27,18 @@ int min( int a, int b)
 
 void init()
 {
-	float dy, dx;
+	float dy{ 0 }, dx{ 0 };
 	int ratio = 32;
-	int maxDist = sqrt((-HEIGHT_SCRREN/2)*(-HEIGHT_SCRREN/2)+(-WIDTH_SCREEN/2)*(-WIDTH_SCREEN/2));
-	for(int y {0}; y < HEIGHT_SCRREN; y++)
+
+	for(int y = 0; y < HEIGHT_SCRREN * 2 ; y++)
 	{
-		dy = (y - HEIGHT_SCRREN / 2);
-		for(int x {0}; x < WIDTH_SCREEN; x++)
+		dy = y - HEIGHT_SCRREN ;
+		for(int x = 0; x < WIDTH_SCREEN * 2 ; x++)
 		{
-			dx = (x - WIDTH_SCREEN / 2);
-			distance[y*WIDTH_SCREEN + x] = int( ratio * heightText / sqrt( dy*dy + dx*dx ) )%heightText;
-			angle[y*WIDTH_SCREEN + x] = 0.5 * widthText * (atan2( dy, dx )/ PI  );
-			shade[y*WIDTH_SCREEN + x] = min(sqrt( dy * dy + dx * dx ),255.)/255.;
+			dx = x - WIDTH_SCREEN;
+			distance[y*(WIDTH_SCREEN*2) + x] = int( ratio * heightText / sqrt( dy*dy + dx*dx ) ) % heightText;
+			angle[y*(WIDTH_SCREEN*2) + x] = (unsigned int) 2 * widthText * atan2( dy, dx )/ PI;
+			shade[y*(WIDTH_SCREEN*2) + x] = min(sqrt( dy * dy + dx * dx ),255.)/255.;
 		}
 	}
 }
@@ -56,8 +55,8 @@ int main()
 	widthText = spr._width;
 	heightText = spr._height;
 
-	float uvx, uvy, shadeValue;
-	int shiftx, shifty;
+	float uvx { 0.f }, uvy { 0.f }, shadeValue { 0.f };
+	int shiftx {0}, shifty{0}, centerx{0}, centery{0}, bufferPos{0};
 	uint32_t time{0};
 
 	uint32_t* ptr_screen = _screen;
@@ -68,16 +67,21 @@ int main()
 
 	for(;;)
 	{ 
-		shiftx = widthText * 1 * time * 1/1000;
+		shiftx = widthText * 2 * time * 1/1000;
 		shifty = heightText * 0.25 * time * 1/1000;
+
+		centerx = WIDTH_SCREEN / 2 + WIDTH_SCREEN / 4 * (sin(time*7./1000.));
+		centery = HEIGHT_SCRREN / 2 + HEIGHT_SCRREN / 3 * (sin(time*11./1000.));
 
 		for(i = 0; i < HEIGHT_SCRREN; i++)
 		{
 			for(j = 0; j < WIDTH_SCREEN; j++)
 			{
-				uvx = (unsigned int)(distance[i*WIDTH_SCREEN+j] + shiftx) % widthText;
-				uvy = (unsigned int)(angle[i*WIDTH_SCREEN+j] + shifty) % heightText;
-				shadeValue = shade[i*WIDTH_SCREEN+j];
+				bufferPos = (i+centery)*WIDTH_SCREEN*2 + j + centerx;
+
+				uvx = (unsigned int)(distance[ bufferPos ] + shiftx) % widthText;
+				uvy = (unsigned int)(angle[ bufferPos ] + shifty) % heightText;
+				shadeValue = shade[ bufferPos ];
 
 				color = spr._data[uvy*widthText + uvx];
 				

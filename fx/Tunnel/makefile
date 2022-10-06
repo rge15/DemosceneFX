@@ -3,11 +3,11 @@
 ############################
 APP 	:= tunnel
 CC 		:= g++
-CCFLAGS := -Wall -pedantic -std=c++20 -g
+CCFLAGS := -Wall -pedantic -std=c++20 -fsanitize=address -g
 C		:= gcc
-CFLAGS 	:=
+CFLAGS 	:= -fsanitize=address
 LIBDIR  := ../lib/
-LIBS 	:= -lX11 -lXext $(LIBDIR)tinyPTCua/libTinyPtc.a $(LIBDIR)picoPNGua/libPicoPng.a
+LIBS 	:= -lX11 -lXext $(LIBDIR)tinyPTCua/libTinyPtc.a $(LIBDIR)picoPNGua/libPicoPng.a -fsanitize=address
 INCDIRS := -I$(LIBDIR)tinyPTCua/src -I$(LIBDIR)picoPNGua/src
 
 ifndef config
@@ -81,6 +81,9 @@ $(foreach F,$(ALLCS),$(eval $(call COMPILE,$(F),$(call C20,$(F)),$(call C2H,$(F)
 
 $(OBJDIRS) :
 	$(shell $(MKDIR) $(OBJDIRS))
+
+assembly :
+	$(CC)
 
 info :
 	$(info $(SRCDIRS))
