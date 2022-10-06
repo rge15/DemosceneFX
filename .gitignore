@@ -37,6 +37,10 @@ moire
 sprite
 tunnel
 
+# Assembly code
+*.dump
+*.s
+
 # VSCode files
 .vscode
 

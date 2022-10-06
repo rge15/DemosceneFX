@@ -36,7 +36,7 @@ void Sprite::fillSpriteData(std::ifstream& p_spriteData) noexcept
 	_width = width;
 	_height = height;
 
-	_data.reserve( pixels.size()>>2 );
+	_data.resize( pixels.size()>>2 );
 	memcpy( _data.data(), pixels.data(), pixels.size());
 }
 

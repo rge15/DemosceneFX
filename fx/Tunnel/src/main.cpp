@@ -70,6 +70,7 @@ int main()
 		shiftx = widthText * 2 * time * 1/1000;
 		shifty = heightText * 0.25 * time * 1/1000;
 
+		//TODO : ESto habrá q cambiarlo por una tabla de sinus precalculada
 		centerx = WIDTH_SCREEN / 2 + WIDTH_SCREEN / 4 * (sin(time*7./1000.));
 		centery = HEIGHT_SCRREN / 2 + HEIGHT_SCRREN / 3 * (sin(time*11./1000.));
 
@@ -83,8 +84,9 @@ int main()
 				uvy = (unsigned int)(angle[ bufferPos ] + shifty) % heightText;
 				shadeValue = shade[ bufferPos ];
 
+				//?Esto se podrá hacer de alguna forma más eficiente?
 				color = spr._data[uvy*widthText + uvx];
-				
+
 				r = (color >> 16) * shadeValue;
 				g = (color >> 8) * shadeValue;
 				b = color * shadeValue;
