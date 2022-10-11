@@ -36,6 +36,7 @@ plasma
 moire
 sprite
 tunnel
+blobs
 
 # Assembly code
 *.dump

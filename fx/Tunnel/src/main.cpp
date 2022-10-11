@@ -30,10 +30,13 @@ void init()
 	float dy{ 0 }, dx{ 0 };
 	int ratio = 32;
 
-	for(int y = 0; y < HEIGHT_SCRREN * 2 ; y++)
+	int doubleHeight = HEIGHT_SCRREN * 2;
+	int doubleWidth = WIDTH_SCREEN * 2;
+
+	for(int y = 0; y < doubleHeight ; y++)
 	{
 		dy = y - HEIGHT_SCRREN ;
-		for(int x = 0; x < WIDTH_SCREEN * 2 ; x++)
+		for(int x = 0; x < doubleWidth ; x++)
 		{
 			dx = x - WIDTH_SCREEN;
 			distance[y*(WIDTH_SCREEN*2) + x] = int( ratio * heightText / sqrt( dy*dy + dx*dx ) ) % heightText;
