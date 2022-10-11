@@ -37,6 +37,7 @@ moire
 sprite
 tunnel
 blobs
+engine
 
 # Assembly code
 *.dump
