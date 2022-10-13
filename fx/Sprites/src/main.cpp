@@ -44,26 +44,18 @@ int main()
 {
 	ptc_open("window", WIDTH_SCREEN, HEIGHT_SCRREN);
 
-	uint32_t i { 0 };
-	uint32_t j { 0 };
 	uint32_t finalCol { 0 };
 
-	int uvx, uvy, time;
-
-	uint32_t* _ptrScreen = _screen;
+	int time;
 
 	Sprite spr1("img/prueba.png");
 
 	for(;;)
 	{
 		//TODO : Esto es como dibujar un sprite en pantalla limpiarlo y dejarlo bonico
-		for(i=0; i < spr1._height; i++)
-		{
-			for(j=0; j< spr1._width; j++)
-			{
-				_screen[i*WIDTH_SCREEN+j] = spr1._data[i*spr1._width+j];
-			}
-		}
+		spr1.setPos( -10 ,  -10  );
+
+		spr1.Draw( _screen, WIDTH_SCREEN, HEIGHT_SCRREN );
 		++time;
 		ptc_update( _screen );
 	}

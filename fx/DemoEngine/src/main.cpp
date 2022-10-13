@@ -24,6 +24,9 @@ int main()
 		fx->Init(engine._screen);
 	}
 
+	//TODO : Entiendo que mejor hacer un primer bucle dibujando cosas
+	//TODO : y hacer otro después más de full FX solamente
+
 	for(auto& fx : fxs )
 	{
 		for( i = 0; i < fx->_time; i++ )
