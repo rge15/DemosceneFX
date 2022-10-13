@@ -1,13 +1,13 @@
-#include "FireFX.hpp"
+#include "PlasmaUpFX.hpp"
 
 
-FireFX::FireFX(uint32_t p_bufferWidth, uint32_t p_bufferHeigth, uint32_t p_time) noexcept
+PlasmaUpFX::PlasmaUpFX(uint32_t p_bufferWidth, uint32_t p_bufferHeigth, uint32_t p_time) noexcept
 : bufferFX { p_bufferWidth, p_bufferHeigth, p_time }
 {
 }
 
 void
-FireFX::Init( uint32_t* p_bufferStart )
+PlasmaUpFX::Init( uint32_t* p_bufferStart )
 {
 	_pixelCount = _bufferWidth * _bufferHeigth;
 	_buffer = p_bufferStart + _pixelCount - 1;
@@ -15,7 +15,7 @@ FireFX::Init( uint32_t* p_bufferStart )
 }
 
 void
-FireFX::Render()
+PlasmaUpFX::Render()
 {
 	uint32_t i { 0 }, fireValue { 0 };
 	uint32_t j = _jInitPos;
@@ -53,10 +53,11 @@ FireFX::Render()
 		fireValue = thisVal + prevVal + aboveVal + nextVal ;
 		fireValue >>= 2;
 
-		fireValue &= 0x00FF0000;
+		fireValue &= 0x00FFFF00;
 
-		if(fireValue <= 0x00330000)
+		if(fireValue <= 0x00300000)
 			fireValue = 0;
+
 
 		*above = fireValue;
 

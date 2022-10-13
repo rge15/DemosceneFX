@@ -5,3 +5,5 @@ extern "C"
 #include <cstdint>
 #include <math.h>
 #include <iostream>
+#include <memory>
+#include <vector>
