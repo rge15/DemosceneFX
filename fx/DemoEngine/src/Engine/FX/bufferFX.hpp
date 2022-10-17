@@ -5,7 +5,6 @@ class bufferFX
 {
 	protected:
 		uint32_t _bufferWidth { 0 }, _bufferHeigth{ 0 };
-		// uint32_t* _buffer { nullptr };
 	public:
 		uint32_t _secTime { 0 };
 

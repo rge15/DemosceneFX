@@ -4,6 +4,7 @@
 FireFX::FireFX(uint32_t p_bufferWidth, uint32_t p_bufferHeigth, uint32_t p_time) noexcept
 : bufferFX { p_bufferWidth, p_bufferHeigth, p_time }
 {
+	Init();
 }
 
 void
