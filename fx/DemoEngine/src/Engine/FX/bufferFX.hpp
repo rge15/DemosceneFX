@@ -5,7 +5,7 @@ class bufferFX
 {
 	protected:
 		uint32_t _bufferWidth { 0 }, _bufferHeigth{ 0 };
-		uint32_t* _buffer { nullptr };
+		// uint32_t* _buffer { nullptr };
 	public:
 		uint32_t _secTime { 0 };
 
@@ -13,8 +13,8 @@ class bufferFX
 		virtual ~bufferFX() = default;
 
 		virtual
-		void Init( uint32_t* p_bufferStart ) = 0;
+		void Init() = 0;
 
 		virtual
-		void Render() = 0;
+		void Render( uint32_t* p_bufferStart ) = 0;
 };

@@ -1,7 +1,6 @@
 #include "Sprite.hpp"
 
-Sprite::Sprite( std::string p_fileSrc, int p_x, int p_y ) noexcept
-: _posX { p_x }, _posY { p_y }
+Sprite::Sprite( std::string p_fileSrc ) noexcept
 {
 	std::ifstream file ( p_fileSrc, std::ios::binary);
 

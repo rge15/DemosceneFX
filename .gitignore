@@ -42,6 +42,8 @@ engine
 # Assembly code
 *.dump
 *.s
+*.png
+*.jpeg
 
 # VSCode files
 .vscode

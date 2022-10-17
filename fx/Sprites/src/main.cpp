@@ -53,7 +53,7 @@ int main()
 	for(;;)
 	{
 		//TODO : Esto es como dibujar un sprite en pantalla limpiarlo y dejarlo bonico
-		spr1.setPos( -10 ,  -10  );
+		spr1.setPos( 10 ,  10  );
 
 		spr1.Draw( _screen, WIDTH_SCREEN, HEIGHT_SCRREN );
 		++time;

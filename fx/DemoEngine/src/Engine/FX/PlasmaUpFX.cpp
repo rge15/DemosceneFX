@@ -7,19 +7,19 @@ PlasmaUpFX::PlasmaUpFX(uint32_t p_bufferWidth, uint32_t p_bufferHeigth, uint32_t
 }
 
 void
-PlasmaUpFX::Init( uint32_t* p_bufferStart )
+PlasmaUpFX::Init()
 {
 	_pixelCount = _bufferWidth * _bufferHeigth;
-	_buffer = p_bufferStart + _pixelCount - 1;
+	// _buffer = p_bufferStart + _pixelCount - 1;
 	_jInitPos = _bufferWidth * (_bufferHeigth - 2);
 }
 
 void
-PlasmaUpFX::Render()
+PlasmaUpFX::Render( uint32_t* p_bufferStart )
 {
 	uint32_t i { 0 }, fireValue { 0 };
 	uint32_t j = _jInitPos;
-	uint32_t* _ptrScreen = _buffer;
+	uint32_t* _ptrScreen = p_bufferStart + _pixelCount - 1;
 	uint32_t rngVal { 0 };
 
 	for(i = _pixelCount ; i > j ; i--)
@@ -34,7 +34,7 @@ PlasmaUpFX::Render()
 		--_ptrScreen;
 	};
 
-	_ptrScreen = _buffer;
+	_ptrScreen = p_bufferStart + _pixelCount - 1;
 
 	for( ; i > _bufferWidth ; i-- )
 	{

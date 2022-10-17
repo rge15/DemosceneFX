@@ -14,5 +14,5 @@ DemoEngine::~DemoEngine()
 void
 DemoEngine::updateDraw() noexcept
 {
-	ptc_update( _screen );
+	ptc_update( _buffer );
 }

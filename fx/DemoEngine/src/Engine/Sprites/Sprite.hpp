@@ -4,7 +4,7 @@
 #include <fstream>
 #include <picopng.hpp>
 #include <cstring>
-#include <Engine/utils/asserts.hpp>
+#include "../utils/asserts.hpp"
 
 class Sprite
 {
@@ -17,7 +17,7 @@ class Sprite
 
 	public:
 		
-		Sprite( std::string p_fileSrc, int p_x, int p_y ) noexcept;
+		Sprite( std::string p_fileSrc ) noexcept;
 
 		~Sprite() noexcept;
 

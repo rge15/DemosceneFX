@@ -13,9 +13,9 @@ class FireFX : public bufferFX
 		~FireFX() = default;
 
 		void
-		Init( uint32_t* p_bufferStart ) override;
+		Init() override;
 
 		void
-		Render() override;
+		Render( uint32_t* p_bufferStart ) override;
 
 };
