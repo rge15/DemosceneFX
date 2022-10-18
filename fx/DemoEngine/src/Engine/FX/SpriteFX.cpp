@@ -7,20 +7,32 @@ SpriteFX::SpriteFX( uint32_t p_bufferWidth, uint32_t p_bufferHeigth, uint32_t p_
 	Init();
 }
 
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+
 void
 SpriteFX::Init()
 {
 }
 
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+
+//TODO : Aqui a veras como haces lo de manejar el tiempo de cada sprite
 void
 SpriteFX::Render( uint32_t* p_bufferStart )
 {
-	_bufferFX.get()->Render( p_bufferStart );
+	if( _bufferFX.get() )
+		_bufferFX.get()->Render( p_bufferStart );
+	
 	for( auto& spr : _sprites )
 	{
 		spr._sprite.get()->Draw( p_bufferStart, _bufferWidth, _bufferHeigth );
 	}
 }
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 
 void
 SpriteFX::addSprite( std::string p_filename, int p_time )
@@ -29,6 +41,9 @@ SpriteFX::addSprite( std::string p_filename, int p_time )
 
 	_sprites.push_back( TimedSprite( std::move(spr), p_time ) );
 }
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 
 void
 SpriteFX::setBufferFX( std::unique_ptr<bufferFX>&& p_bufferFX ) noexcept

@@ -7,12 +7,18 @@ PlasmaUpFX::PlasmaUpFX(uint32_t p_bufferWidth, uint32_t p_bufferHeigth, uint32_t
 	Init();
 }
 
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+
 void
 PlasmaUpFX::Init()
 {
 	_pixelCount = _bufferWidth * _bufferHeigth;
 	_jInitPos = _bufferWidth * (_bufferHeigth - 2);
 }
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 
 void
 PlasmaUpFX::Render( uint32_t* p_bufferStart )

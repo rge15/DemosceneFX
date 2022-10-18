@@ -59,7 +59,6 @@ DemoTimer::updateDraw() noexcept
 		_lastTime = ellapsedSeconds();
 		return true;
 	}
-
 	return false;
 }
 

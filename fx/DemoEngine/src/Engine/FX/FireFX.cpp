@@ -7,12 +7,18 @@ FireFX::FireFX(uint32_t p_bufferWidth, uint32_t p_bufferHeigth, uint32_t p_time)
 	Init();
 }
 
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+
 void
 FireFX::Init()
 {
 	_pixelCount = _bufferWidth * _bufferHeigth;
 	_jInitPos = _bufferWidth * (_bufferHeigth - 2);
 }
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 
 void
 FireFX::Render( uint32_t* p_bufferStart )

@@ -8,7 +8,7 @@
 
 class Sprite
 {
-	public:
+	private:
 		int32_t _width{ 0 }, _height{ 0 };
 		
 		std::vector<uint32_t> _data {};
