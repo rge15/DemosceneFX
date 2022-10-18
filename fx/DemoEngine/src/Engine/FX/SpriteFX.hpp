@@ -6,7 +6,15 @@
 class SpriteFX : public bufferFX
 {
 	public:
-		Vector<uniqPtr<Sprite>> _sprites {};
+
+		struct TimedSprite
+		{
+			uniqPtr<Sprite> _sprite { nullptr };
+			int				_time { 0 };
+		};
+		
+
+		Vector<TimedSprite> _sprites {};
 
 		SpriteFX( uint32_t p_bufferWidth, uint32_t p_bufferHeigth, uint32_t p_time ) noexcept;
 		~SpriteFX() = default;
@@ -18,6 +26,6 @@ class SpriteFX : public bufferFX
 		Render( uint32_t* p_bufferStart ) override;
 
 		void
-		addSprite( std::string p_filename );
+		addSprite( std::string p_filename, int p_time = 10 );
 
 };

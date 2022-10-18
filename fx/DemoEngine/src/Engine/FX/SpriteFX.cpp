@@ -18,13 +18,15 @@ SpriteFX::Render( uint32_t* p_bufferStart )
 
 	for( auto& spr : _sprites )
 	{
-		spr.get()->Draw( p_bufferStart, _bufferWidth, _bufferHeigth );
+		spr._sprite.get()->Draw( p_bufferStart, _bufferWidth, _bufferHeigth );
 	}
 
 }
 
 void
-SpriteFX::addSprite( std::string p_filename )
+SpriteFX::addSprite( std::string p_filename, int p_time )
 {
-	_sprites.push_back( std::make_unique<Sprite>(p_filename) );
+	auto spr = std::make_unique<Sprite>(p_filename);
+
+	_sprites.push_back( TimedSprite( std::move(spr), p_time ) );
 }

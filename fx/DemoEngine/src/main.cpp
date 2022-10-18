@@ -30,13 +30,8 @@ int main()
 	//? [2.4] : Se pueden hacer variaciones de este buffer para que tenga un updatePos que mueva los sprite en forma de sinusoidal o algo
 	//? [3] : Hacer después algun tipo de drawSystem que sea el encargado de dibujar los efectos
 
-	Vector<uniqPtr<Sprite>> sprs{};
-	sprs.push_back( std::make_unique<Sprite>("img/prueba.png") );
-	sprs.push_back( std::make_unique<Sprite>("img/prueba.png") );
-	sprs[1].get()->setPos(30,30);
-
 	SpriteFX sprFX( width, height, 10 );
-	sprFX.addSprite("img/prueba.png");
+	sprFX.addSprite("img/prueba.png", 10);
 
 	//Habrá que hacer un drawSystem 
 	//Only BufferFX loop
@@ -48,6 +43,7 @@ int main()
 			if(	demoTimer.updateDraw() )
 			{
 				fx->Render( engine._buffer );
+				sprFX.Render( engine._buffer );
 				engine.updateDraw();
 			}
 		}
