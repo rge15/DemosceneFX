@@ -13,8 +13,8 @@ class SpriteFX : public bufferFX
 			int				_time { 0 };
 		};
 		
-
 		Vector<TimedSprite> _sprites {};
+		uniqPtr<bufferFX> _bufferFX { nullptr };
 
 		SpriteFX( uint32_t p_bufferWidth, uint32_t p_bufferHeigth, uint32_t p_time ) noexcept;
 		~SpriteFX() = default;
@@ -27,5 +27,8 @@ class SpriteFX : public bufferFX
 
 		void
 		addSprite( std::string p_filename, int p_time = 10 );
+
+		void
+		setBufferFX( std::unique_ptr<bufferFX>&& p_bufferFX ) noexcept;
 
 };

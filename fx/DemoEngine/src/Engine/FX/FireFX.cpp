@@ -11,7 +11,6 @@ void
 FireFX::Init()
 {
 	_pixelCount = _bufferWidth * _bufferHeigth;
-	//_buffer = p_bufferStart + _pixelCount - 1;
 	_jInitPos = _bufferWidth * (_bufferHeigth - 2);
 }
 
@@ -63,6 +62,14 @@ FireFX::Render( uint32_t* p_bufferStart )
 
 		--_ptrScreen;
 
+	}
+
+	for(; i > -_bufferWidth ; i--)
+	{
+	
+		*_ptrScreen = 0;
+	
+		--_ptrScreen;
 	}
 
 }

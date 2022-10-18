@@ -11,7 +11,6 @@ void
 PlasmaUpFX::Init()
 {
 	_pixelCount = _bufferWidth * _bufferHeigth;
-	// _buffer = p_bufferStart + _pixelCount - 1;
 	_jInitPos = _bufferWidth * (_bufferHeigth - 2);
 }
 

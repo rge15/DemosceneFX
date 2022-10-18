@@ -17,6 +17,22 @@ DemoTimer::ellapsedTime() const noexcept
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 
+void
+DemoTimer::reset( int p_frameRate ) noexcept
+{
+	if( p_frameRate > 0 )
+	{
+		_frameRate = p_frameRate;
+		_refreshTime = 1.f/p_frameRate;
+	}
+	_initTime = clock::now();
+	_lastTime = 0.f ;
+	_totalFXTime = 0;
+}
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+
 double
 DemoTimer::ellapsedSeconds() const noexcept
 {

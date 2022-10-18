@@ -11,6 +11,7 @@ struct DemoTimer
 
 		int _totalFXTime { 0 };
 
+		//TODO : Alomejor el framerate dependeria del buffer y no del engine(Timer)
 		int _frameRate { 60 };
 		double _refreshTime { 1.f / _frameRate };
 
@@ -35,4 +36,6 @@ struct DemoTimer
 		bool
 		updateDraw() noexcept;
 
+		void
+		reset( int p_frameRate = 0 ) noexcept;
 };

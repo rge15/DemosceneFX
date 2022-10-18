@@ -6,13 +6,20 @@ DemoEngine::DemoEngine() noexcept
 	ptc_open("MK I - BitBoy 1st demo", _widthScr, _heightScr);
 }
 
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+
 DemoEngine::~DemoEngine()
 {
 	ptc_close();
 }
 
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+
 void
-DemoEngine::updateDraw() noexcept
+DemoEngine::Draw() noexcept
 {
-	ptc_update( _buffer );
+	_drawer.get()->Draw();
 }
