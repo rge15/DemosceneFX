@@ -11,16 +11,16 @@ extern "C"
 #define TOTAL_PIXELS ( WIDTH_SCREEN * HEIGHT_SCRREN )  
 
 uint32_t _screen[ TOTAL_PIXELS ];
-int _sinus[512];
+int _sinus[360];
 
 void init()
 {
-	// 360/512 = 0.703125
+	// 360/360 = 0.703125
 	// 1º = 0.0174533 rad
 	float rad { 0.f }, resul;
-	for(int i = 0; i < 512 ; i++)
+	for(int i = 0; i < 360 ; i++)
 	{
-		rad = (i * 0.703125) * 0.0174533;
+		rad = (i) * 0.0174533;
 		resul = sin(rad);
 		_sinus[i] = resul*255;
 	}
@@ -63,14 +63,14 @@ int main()
 		for( i = 0; i< HEIGHT_SCRREN; i++)
 		{
 			uvy = i - HEIGHT_SCRREN/2;
-			uvy2 = i + _sinus[(time+318)%512];
+			uvy2 = i + _sinus[(time+270)%360];
 
 			uvytimed = i + timeIny;
 			
 			uvy %= HEIGHT_SCRREN;
 			uvytimed %= HEIGHT_SCRREN;
 
-			remapUVytimed = (uint32_t)remap(uvytimed, HEIGHT_SCRREN, 512 );
+			remapUVytimed = (uint32_t)remap(uvytimed, HEIGHT_SCRREN, 360 );
 
 			for( j = 0; j < WIDTH_SCREEN; j++)
 			{
@@ -83,16 +83,16 @@ int main()
 				mod1 = uvx * uvx  + uvy * uvy;
 				mod1 *= 1/mod1;
 				mod1 -= timeInx;
-				mod1 %= 512;
+				mod1 %= 360;
 
-				uvx += _sinus[(time)%512];
+				uvx += _sinus[(time)%360];
 				mod2 = sqrt(uvx*uvx+uvy2*uvy2);
 				mod2 += timeInx + mod2;
 				mod2 %= maxDistScreen;
 
-				mod2 = remap(mod2, maxDistScreen, 512);
+				mod2 = remap(mod2, maxDistScreen, 360);
 
-				remapUVxtimed = (uint32_t)remap(uvxtimed, WIDTH_SCREEN, 512 );
+				remapUVxtimed = (uint32_t)remap(uvxtimed, WIDTH_SCREEN, 360 );
 
 				//? GOOD VARIATION
 				// value = abs(_sinus[remapUVxtimed] + _sinus[remapUVytimed] + _sinus[mod1] + _sinus[mod2]);
@@ -100,16 +100,16 @@ int main()
 				
 				value >>= 1;
 
-				value %= 512;
+				value %= 360;
 
 				valueR = max(_sinus[value],0);
-				valueG = max(_sinus[((value+384)%512)],0);
+				valueG = max(_sinus[((value+270)%360)],0);
 
 				value = valueR;
 				value <<= 8;
 				value += valueG;
 				value <<= 8;
-				// value += max(_sinus[(j+timeInx)%512],0);
+				// value += max(_sinus[(j+timeInx)%360],0);
 
 				_screen[i*WIDTH_SCREEN+j] = value;
 			}

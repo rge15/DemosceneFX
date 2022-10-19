@@ -42,7 +42,7 @@ class Drawer
 		addBuffer( uint32_t p_time );
 
 		TunnelFX&
-		addBuffer( uint32_t p_time, std::string p_spriteFile );
+		addTunnelBuffer( uint32_t p_time, std::string p_spriteFile );
 
 };
 
