@@ -1,5 +1,5 @@
+#pragma once
 #include <utilities/config.hpp>
-
 
 template <typename T>
 using Vector = std::vector<T>;

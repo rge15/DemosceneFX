@@ -10,20 +10,21 @@ int main()
 {
 	auto demoEngine = std::make_unique<DemoEngine>();
 	auto& engine = *demoEngine.get();
-	auto width = engine._widthScr;
-	auto height = engine._heightScr;
+	// auto width = engine._widthScr;
+	// auto height = engine._heightScr;
 	auto& drawer = engine.getDrawer();
 
-	auto& sprBuffer = drawer.addBuffer<SpriteFX>( width, height, 10 );
+	auto& sprBuffer = drawer.addBuffer<SpriteFX>( 10 );
 	auto& spr1 = sprBuffer.addSprite("img/test-1.png", 10);
 
 	spr1.setPos( 100,100 );
 
-	sprBuffer.setBufferFX( std::make_unique<FireFX>(width, height, 10) );
+	sprBuffer.setBufferFX( std::make_unique<FireFX>( 10 ) );
 
-	drawer.addBuffer<FireFX>( width, height, 10 );
-	drawer.addBuffer<PlasmaUpFX>( width, height, 10 );
-	
+	drawer.addBuffer<FireFX>( 10 );
+	drawer.addBuffer<PlasmaUpFX>( 10 );
+	drawer.addBuffer( 10, "img/tunnel_1.png" );
+
 	// TODO 19 OCTUBRE
 	//? [1]	: Pasar los otros FX de los efectos y una vez checkear todos hacer otra TODO list de todos los recursos y optimizaciones que hacer
 	//? [2.4]{SpriteFX} : Se pueden hacer variaciones de este buffer para que tenga un updatePos que mueva los sprite en forma de sinusoidal o algo

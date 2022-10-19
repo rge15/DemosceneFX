@@ -19,7 +19,7 @@ class SpriteFX : public bufferFX
 		//Manager of the FX to be draw with the sprites
 		uniqPtr<bufferFX> _bufferFX { nullptr };
 
-		SpriteFX( uint32_t p_bufferWidth, uint32_t p_bufferHeigth, uint32_t p_time ) noexcept;
+		SpriteFX( uint32_t p_time ) noexcept;
 		~SpriteFX() = default;
 
 		/**

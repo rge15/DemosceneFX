@@ -1,12 +1,15 @@
 #pragma once
 #include <utilities/config.hpp>
 #include <utilities/alias.hpp>
+#include <Engine/DemoEngineConfig.hpp>
 #include "Drawer.hpp"
+
+using namespace Demoengine::Config;
+
 class DemoEngine
 {
 	public :
-		static const uint32_t _widthScr { 720 };
-		static const uint32_t _heightScr { 480 };
+
 		uint32_t _buffer[ _widthScr * _heightScr ];
 
 		uniqPtr<Drawer> _drawer { std::make_unique<Drawer>( _buffer ) };

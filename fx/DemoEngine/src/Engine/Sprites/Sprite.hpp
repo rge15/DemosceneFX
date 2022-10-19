@@ -1,3 +1,4 @@
+#pragma once
 #include <cstdint>
 #include <iostream>
 #include <vector>
@@ -8,18 +9,18 @@
 
 class Sprite
 {
-	private:
-		// Size of the sprite
-		int32_t _width{ 0 }, _height{ 0 };
-		
-		//Data of the sprite
-		std::vector<uint32_t> _data {};
-
+	private:		
 		//Pos of the sprite in the screen
 		int32_t _posX { 0 }, _posY { 0 };
 
 	public:
-		
+		//Data of the sprite
+		std::vector<uint32_t> _data {};
+
+		// Size of the sprite
+		int32_t _width{ 0 }, _height{ 0 };
+
+	public:
 		/**
 		 * 	@brief Cosntructor of the class Sprite
 		 * 
@@ -49,8 +50,6 @@ class Sprite
 		 * 	@brief Draws the sprite on the specified buffer
 		 * 
 		 * 	@param p_buffer Pointer to the start of the buffer
-		 * 	@param p_width	Total width of the buffer
-		 * 	@param p_height Total height of the buffer
 		*/
 		void Draw( uint32_t* p_buffer, uint32_t p_width, uint32_t p_height ) noexcept;
 };

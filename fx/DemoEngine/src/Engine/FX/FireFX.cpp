@@ -1,8 +1,8 @@
 #include "FireFX.hpp"
 
 
-FireFX::FireFX(uint32_t p_bufferWidth, uint32_t p_bufferHeigth, uint32_t p_time) noexcept
-: bufferFX { p_bufferWidth, p_bufferHeigth, p_time }
+FireFX::FireFX( uint32_t p_time ) noexcept
+: bufferFX { p_time }
 {
 	Init();
 }
@@ -13,8 +13,7 @@ FireFX::FireFX(uint32_t p_bufferWidth, uint32_t p_bufferHeigth, uint32_t p_time)
 void
 FireFX::Init()
 {
-	_pixelCount = _bufferWidth * _bufferHeigth;
-	_jInitPos = _bufferWidth * (_bufferHeigth - 2);
+	_jInitPos = _widthScr * (_heightScr - 2);
 }
 
 //-----------------------------------------------------------------------------
@@ -42,12 +41,12 @@ FireFX::Render( uint32_t* p_bufferStart )
 
 	_ptrScreen = p_bufferStart + _pixelCount - 1;
 
-	for( ; i > _bufferWidth ; i-- )
+	for( ; i > _widthScr ; i-- )
 	{
 		//We get the pointers to the around pixels
 		uint32_t* prev = _ptrScreen-1;
 		uint32_t* next = _ptrScreen+1;
-		uint32_t* above = _ptrScreen-_bufferWidth;
+		uint32_t* above = _ptrScreen-_widthScr;
 
 		//And their value
 		uint32_t prevVal = *prev;
@@ -70,7 +69,7 @@ FireFX::Render( uint32_t* p_bufferStart )
 
 	}
 
-	for(; i > -_bufferWidth ; i--)
+	for(; i > 0 ; i--)
 	{
 	
 		*_ptrScreen = 0;

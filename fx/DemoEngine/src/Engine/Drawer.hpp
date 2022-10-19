@@ -2,8 +2,7 @@
 #include <Engine/FX/bufferFX.hpp>
 #include <utilities/alias.hpp>
 #include <Engine/utils/Timer.hpp>
-#include <Engine/FX/bufferFX.hpp>
-
+#include <Engine/FX/TunnelFX.hpp>
 class Drawer
 {
 	private:
@@ -36,13 +35,15 @@ class Drawer
 		 * 	
 		 * 	@tparam Type of buffer to be created
 		 * 
-		 * 	@param	p_bufferWidth Width of the buffer for the bufferFX constructor
-		 * 	@param	p_bufferHeigth Heigth of the buffer for the bufferFX constructor
 		 * 	@param	p_time Time to the bufferFX to be drawn
 		*/
 		template<typename bufferT>
 		bufferT&
-		addBuffer( uint32_t p_bufferWidth, uint32_t p_bufferHeigth, uint32_t p_time );
+		addBuffer( uint32_t p_time );
+
+		TunnelFX&
+		addBuffer( uint32_t p_time, std::string p_spriteFile );
+
 };
 
 #include "Drawer.tpp"
