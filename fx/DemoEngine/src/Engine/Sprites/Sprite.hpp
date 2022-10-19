@@ -9,21 +9,48 @@
 class Sprite
 {
 	private:
+		// Size of the sprite
 		int32_t _width{ 0 }, _height{ 0 };
 		
+		//Data of the sprite
 		std::vector<uint32_t> _data {};
 
+		//Pos of the sprite in the screen
 		int32_t _posX { 0 }, _posY { 0 };
 
 	public:
 		
+		/**
+		 * 	@brief Cosntructor of the class Sprite
+		 * 
+		 * 	@param p_fileSrc String with the path of the Image
+		*/
 		Sprite( std::string p_fileSrc ) noexcept;
 
-		~Sprite() noexcept;
+		/** @brief Destructor of the Sprite class */
+		~Sprite() = default;
 
+		/**
+		 * 	@brief Sets the position of the sprite
+		 * 
+		 * 	@param p_x Position on the X axis
+		 * 	@param p_y Position on the Y axis
+		*/
 		void setPos( int p_x, int p_y ) noexcept;
 
+		/**
+		 * 	@brief Method tha fills the sprite data
+		 * 
+		 * 	@param p_spriteData Ifstream reference with ths sprite file opened
+		*/
 		void fillSpriteData(std::ifstream& p_spriteData) noexcept;
 
+		/**
+		 * 	@brief Draws the sprite on the specified buffer
+		 * 
+		 * 	@param p_buffer Pointer to the start of the buffer
+		 * 	@param p_width	Total width of the buffer
+		 * 	@param p_height Total height of the buffer
+		*/
 		void Draw( uint32_t* p_buffer, uint32_t p_width, uint32_t p_height ) noexcept;
 };

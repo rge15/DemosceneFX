@@ -42,7 +42,7 @@ class SpriteFX : public bufferFX
 		 * 	@param p_filename Path to the image Sprite
 		 * 	@param p_time Lifetime of the sprite ( Currently dissabled )
 		*/		
-		void
+		Sprite&
 		addSprite( std::string p_filename, int p_time = 10 );
 
 		/**

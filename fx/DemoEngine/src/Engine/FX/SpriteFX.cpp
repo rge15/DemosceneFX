@@ -34,12 +34,14 @@ SpriteFX::Render( uint32_t* p_bufferStart )
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 
-void
+Sprite&
 SpriteFX::addSprite( std::string p_filename, int p_time )
 {
 	auto spr = std::make_unique<Sprite>(p_filename);
 
 	_sprites.push_back( TimedSprite( std::move(spr), p_time ) );
+
+	return *(_sprites.back()._sprite.get());
 }
 
 //-----------------------------------------------------------------------------

@@ -7,13 +7,9 @@ Sprite::Sprite( std::string p_fileSrc ) noexcept
 	ASSERT(file.is_open(), "Error opening the img for the sprite")
 
 	fillSpriteData( file );
+
+	file.close();
 }
-
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
-
-Sprite::~Sprite() noexcept
-{}
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
@@ -38,6 +34,15 @@ void Sprite::fillSpriteData(std::ifstream& p_spriteData) noexcept
 
 	_data.resize( pixels.size()>>2 );
 	memcpy( _data.data(), pixels.data(), pixels.size());
+
+	for( uint32_t i = 0 ; i < height; i++)
+	{
+		for( uint32_t j = 0 ; j < width; j++)
+		{
+			_data[i*height+j] <<= 8;
+			_data[i*height+j] >>= 8;
+		}
+	}
 }
 
 //-----------------------------------------------------------------------------
@@ -73,12 +78,8 @@ Sprite::Draw( uint32_t* p_buffer, uint32_t p_width, uint32_t p_height  ) noexcep
 	}
 
 	for( i = iStart ; i < iEnd ; i++)
-	{
 		for( j = jStart ; j< jEnd ; j++)
-		{
 			p_buffer[ (finalY + i - iStart) * p_width + (finalX + j - jStart) ] = _data[ i * _width + j];
-		}
-	}
 
 }
 
