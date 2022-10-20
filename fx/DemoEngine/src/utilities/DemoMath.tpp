@@ -3,7 +3,7 @@
 namespace DemoMath
 {
 
-	template<Arithmetic numT>
+	template<numericType numT>
 	numT
 	min( numT a, numT b) noexcept
 	{
@@ -15,7 +15,7 @@ namespace DemoMath
 	//-------------------------------------------------------------------------
 	//-------------------------------------------------------------------------
 
-	template<Arithmetic numT>
+	template<numericType numT>
 	float
 	remap( numT value, float actualMax, float targetMax ) noexcept
 	{
@@ -25,7 +25,7 @@ namespace DemoMath
 	//-------------------------------------------------------------------------
 	//-------------------------------------------------------------------------
 
-	template<Arithmetic numT>
+	template<numericType numT>
 	numT
 	max( numT a, numT b) noexcept
 	{

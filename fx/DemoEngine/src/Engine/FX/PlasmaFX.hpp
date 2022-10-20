@@ -1,6 +1,5 @@
 #pragma once
 #include "bufferFX.hpp"
-#include <utilities/DemoMath.hpp>
 
 class PlasmaFX : public bufferFX
 {

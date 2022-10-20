@@ -7,18 +7,18 @@ namespace DemoMath
 
 	constexpr float PI = 3.14159265359;
 	
-	template<Arithmetic numT>
+	template<numericType numT>
 	numT
 	min( numT a, numT b) noexcept;
 
 	float
 	remap( float value, float actualMax, float targetMax ) noexcept;
 
-	template<Arithmetic numT>
+	template<numericType numT>
 	float
 	remap( numT value, float actualMax, float targetMax ) noexcept;
 
-	template<Arithmetic numT>
+	template<numericType numT>
 	numT
 	max(numT val1, numT val2) noexcept;
 

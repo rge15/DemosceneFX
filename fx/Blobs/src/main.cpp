@@ -78,7 +78,6 @@ int main()
 	{
 		for(auto& blob : blobs)
 		{
-			//TODO : Hacer que vayan de forma aleatoria con unas ricas lissajous curves
 			blob.x =  HALF_WIDTH_SCREEN + (_sinus[( (time >> blob.speedScaleX) + time )%512]);
 			blob.y =  HALF_HEIGHT_SCRREN + (_sinus[( (time >> blob.speedScaleY) + time + 381)%512]);
 		}

@@ -49,8 +49,6 @@ int main()
 	int uvx, uvy, p1x, p1y, p2x, p2y;
 	uint32_t time{0}, length;
 	
-	int maxDistScreen = sqrt((HEIGHT_SCRREN/2)*(HEIGHT_SCRREN/2)+(WIDTH_SCREEN/2)*(WIDTH_SCREEN/2));
-
 	init();
 
 	std::cout << "Calculado tabla de senos" << std::endl;
@@ -84,12 +82,12 @@ int main()
 
 				//?Colors and displays of the effect
 				//?Variation I?
-				length >>= 5;
-				length &= 1;
-				length *= 255;
+				// length >>= 5;
+				// length &= 1;
+				// length *= 255;
 				
 				//?Variation II?
-				// length &= 255;
+				length &= 255;
 
 				finalCol = (length << 16) + (length << 8) + length;
 

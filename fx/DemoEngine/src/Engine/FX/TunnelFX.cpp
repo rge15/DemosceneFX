@@ -29,7 +29,7 @@ TunnelFX::Init()
 			dx = x - _widthScr;
 			distance[y*(_widthScr*2) + x] = int( ratio * _heightText / sqrt( dy*dy + dx*dx ) ) % _heightText;
 			angle[y*(_widthScr*2) + x] = (unsigned int) 2 * _widthText * atan2( dy, dx )/ DemoMath::PI ;
-			shade[y*(_widthScr*2) + x] = DemoMath::min<float>(sqrt( dy * dy + dx * dx ),255.)/255.;
+			shade[y*(_widthScr*2) + x] = DemoMath::min<float>(sqrt( dy * dy + dx * dx ),255.f)/255.;
 		}
 	}
 }

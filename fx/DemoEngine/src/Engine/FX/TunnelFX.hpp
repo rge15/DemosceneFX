@@ -2,7 +2,6 @@
 #include "bufferFX.hpp"
 #include <Engine/Sprites/Sprite.hpp>
 #include <utilities/alias.hpp>
-#include <utilities/DemoMath.hpp>
 
 class TunnelFX : public bufferFX
 {

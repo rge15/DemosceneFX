@@ -1,6 +1,7 @@
 #pragma once
 #include <utilities/config.hpp>
 #include <Engine/DemoEngineConfig.hpp>
+#include <utilities/DemoMath.hpp>
 using namespace Demoengine::Config;
 
 class bufferFX
