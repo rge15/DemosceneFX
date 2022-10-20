@@ -1,7 +1,7 @@
 #include "MoireExtendFX.hpp"
 
-MoireExtendFX::MoireExtendFX( uint32_t p_time ) noexcept
-: bufferFX { p_time }
+MoireExtendFX::MoireExtendFX( uint32_t p_time, DrawerSrc& p_src ) noexcept
+: bufferFX { p_time, p_src }
 {
 	Init();
 }
@@ -12,15 +12,6 @@ MoireExtendFX::MoireExtendFX( uint32_t p_time ) noexcept
 void
 MoireExtendFX::Init()
 {
-	// 1º = 0.0174533 rad
-	float rad { 0.f }, resul;
-	for(int i = 0; i < 360 ; i++)
-	{
-		rad = (i) * 0.0174533;
-		resul = sin(rad);
-		//Range for a color channel
-		_sinus[i] = resul*255;
-	}
 }
 
 //-----------------------------------------------------------------------------
@@ -32,11 +23,11 @@ MoireExtendFX::Render( uint32_t* p_bufferStart )
 	int uvx, uvy, p1x, p1y, p2x, p2y;
 	uint32_t length, finalCol { 0 };
 
-	p1x = _widthScr/2 + (_sinus[(_time>>2)%360]);
-	p1y = _heightScr/2 + (_sinus[(_time/3)%360]);
+	p1x = _widthScr/2 + ( _src._colourSinus[(_time>>2) % _sinusTableIndices ]);
+	p1y = _heightScr/2 + ( _src._colourSinus[(_time/3) % _sinusTableIndices ]);
 
-	p2x = _widthScr/2 - (_sinus[((_time+270)>>2)%360]);
-	p2y = _heightScr/2 + (_sinus[(_time+270)%360]);
+	p2x = _widthScr/2 - ( _src._colourSinus[(( _time + _cosOffsetTable )>>2)%_sinusTableIndices]);
+	p2y = _heightScr/2 + ( _src._colourSinus[( _time + _cosOffsetTable )%_sinusTableIndices]);
 
 	for (int i = 0; i < _heightScr; i++)
 	{

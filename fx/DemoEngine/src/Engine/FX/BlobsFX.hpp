@@ -16,10 +16,9 @@ class BlobsFX : public bufferFX
 		int _time {};
 		
 		Blob blobs[ numBlobs ];
-		int _sinus[360];
 
 	public:
-		BlobsFX( uint32_t p_time ) noexcept;
+		BlobsFX( uint32_t p_time, DrawerSrc& p_src ) noexcept;
 		~BlobsFX() = default;
 
 		/**

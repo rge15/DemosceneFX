@@ -1,7 +1,7 @@
 #include "TunnelFX.hpp"
 
-TunnelFX::TunnelFX( uint32_t p_time, std::string p_spritePath ) noexcept
-: bufferFX { p_time }, _spr { std::make_unique<Sprite>( p_spritePath ) }
+TunnelFX::TunnelFX( uint32_t p_time, DrawerSrc& p_src, std::string p_spritePath ) noexcept
+: bufferFX { p_time, p_src }, _spr { std::make_unique<Sprite>( p_spritePath ) }
 {
 	Init();
 }

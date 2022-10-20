@@ -1,7 +1,7 @@
 #include "MoireTimedFX.hpp"
 
-MoireTimedFX::MoireTimedFX( uint32_t p_time ) noexcept
-: bufferFX { p_time }
+MoireTimedFX::MoireTimedFX( uint32_t p_time, DrawerSrc& p_src ) noexcept
+: bufferFX { p_time, p_src }
 {
 	Init();
 }

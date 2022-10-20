@@ -9,7 +9,7 @@ class PlasmaUpFX : public bufferFX
 		std::size_t _jInitPos {};
 
 	public:
-		PlasmaUpFX( uint32_t p_time ) noexcept;
+		PlasmaUpFX( uint32_t p_time, DrawerSrc& p_src ) noexcept;
 		~PlasmaUpFX() = default;
 
 		/**

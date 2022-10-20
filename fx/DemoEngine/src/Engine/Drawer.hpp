@@ -3,6 +3,8 @@
 #include <utilities/alias.hpp>
 #include <Engine/utils/Timer.hpp>
 #include <Engine/FX/TunnelFX.hpp>
+#include <Engine/DrawerSrc.hpp>
+
 class Drawer
 {
 	private:
@@ -10,6 +12,7 @@ class Drawer
 	
 		DemoTimer	_timer { 60 };
 		uint32_t&	_buffer;
+		uniqPtr<DrawerSrc> _src = std::make_unique<DrawerSrc>();
 
 		void
 		updateDraw() noexcept;

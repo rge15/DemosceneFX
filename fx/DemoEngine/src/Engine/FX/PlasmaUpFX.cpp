@@ -1,8 +1,8 @@
 #include "PlasmaUpFX.hpp"
 
 
-PlasmaUpFX::PlasmaUpFX( uint32_t p_time ) noexcept
-: bufferFX { p_time }
+PlasmaUpFX::PlasmaUpFX( uint32_t p_time, DrawerSrc& p_src ) noexcept
+: bufferFX { p_time, p_src }
 {
 	Init();
 }

@@ -8,7 +8,7 @@ class MoireTimedFX : public bufferFX
 		int _time { 0 };
 
 	public:
-		MoireTimedFX( uint32_t p_time ) noexcept;
+		MoireTimedFX( uint32_t p_time, DrawerSrc& p_src ) noexcept;
 		~MoireTimedFX() = default;
 
 		/**

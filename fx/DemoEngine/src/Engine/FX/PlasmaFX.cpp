@@ -1,7 +1,7 @@
 #include "PlasmaFX.hpp"
 
-PlasmaFX::PlasmaFX( uint32_t p_time ) noexcept
-: bufferFX { p_time }
+PlasmaFX::PlasmaFX( uint32_t p_time, DrawerSrc& p_src ) noexcept
+: bufferFX { p_time, p_src }
 {
 	Init();
 }
@@ -12,18 +12,7 @@ PlasmaFX::PlasmaFX( uint32_t p_time ) noexcept
 void
 PlasmaFX::Init()
 {
-	// 1º = 0.0174533 rad
-	float rad { 0.f }, resul;
-	for(int i = 0; i < 360 ; i++)
-	{
-		rad = (i) * 0.0174533;
-		resul = sin(rad);
-		//Range for a color channel
-		_sinus[i] = resul*255;
-	}
-
 	maxDistScreen = sqrt((_heightScr/2)*(_heightScr/2)+(_widthScr/2)*(_widthScr/2));
-
 }
 
 //-----------------------------------------------------------------------------
@@ -39,14 +28,14 @@ PlasmaFX::Render( uint32_t* p_bufferStart )
 	for(uint32_t i = 0; i< _heightScr; i++)
 	{
 		uvy = i - _heightScr/2;
-		uvy2 = i + _sinus[(_time+270)%360];
+		uvy2 = i + _src._colourSinus[(_time + _cosOffsetTable ) % _sinusTableIndices ];
 
 		uvytimed = i + _timeIny;
 
 		uvy %= _heightScr;
 		uvytimed %= _heightScr;
 
-		remapUVytimed = DemoMath::remap(uvytimed, _heightScr, 360 );
+		remapUVytimed = DemoMath::remap(uvytimed, _heightScr, _sinusTableIndices );
 
 		for(uint32_t j = 0; j < _widthScr; j++)
 		{
@@ -59,25 +48,25 @@ PlasmaFX::Render( uint32_t* p_bufferStart )
 			mod1 = uvx * uvx  + uvy * uvy;
 			mod1 *= 1/mod1;
 			mod1 -= _timeInx;
-			mod1 %= 360;
+			mod1 %= _sinusTableIndices;
 
-			uvx += _sinus[(_time)%360];
+			uvx += _src._colourSinus[(_time)%_sinusTableIndices];
 			mod2 = sqrt(uvx*uvx+uvy2*uvy2);
 			mod2 += _timeInx + mod2;
 			mod2 %= maxDistScreen;
 
-			mod2 = DemoMath::remap(mod2, maxDistScreen, 360);
+			mod2 = DemoMath::remap(mod2, maxDistScreen, _sinusTableIndices);
 
-			remapUVxtimed = DemoMath::remap(uvxtimed, _widthScr, 360 );
+			remapUVxtimed = DemoMath::remap(uvxtimed, _widthScr, _sinusTableIndices );
 
-			value = DemoMath::max<int>( _sinus[remapUVxtimed] + _sinus[remapUVytimed] + _sinus[mod1] + _sinus[mod2],0);			
+			value = DemoMath::max<int>( _src._colourSinus[remapUVxtimed] + _src._colourSinus[remapUVytimed] + _src._colourSinus[mod1] + _src._colourSinus[mod2],0);			
 
 			value >>= 1;
 
-			value %= 360;
+			value %= _sinusTableIndices;
 
-			valueR = DemoMath::max<int>(_sinus[value],0);
-			valueG = DemoMath::max<int>(_sinus[((value+270)%360)],0);
+			valueR = DemoMath::max<int>(_src._colourSinus[value],0);
+			valueG = DemoMath::max<int>(_src._colourSinus[((value + _cosOffsetTable )%_sinusTableIndices)],0);
 
 			value = valueR;
 			value <<= 8;

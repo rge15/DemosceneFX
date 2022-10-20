@@ -1,8 +1,8 @@
 #include "BlobsFX.hpp"
 
 
-BlobsFX::BlobsFX( uint32_t p_time ) noexcept
-: bufferFX { p_time }
+BlobsFX::BlobsFX( uint32_t p_time, DrawerSrc& p_src ) noexcept
+: bufferFX { p_time, p_src }
 {
 	Init();
 }
@@ -18,16 +18,6 @@ BlobsFX::Init()
 		blob.speedScaleX = rand()%4;
 		blob.speedScaleY = rand()%4;
 	}
-
-	// 1º = 0.0174533 rad
-	float rad { 0.f }, resul;
-	for(int i = 0; i < 360 ; i++)
-	{
-		rad = i * 0.0174533;
-		resul = sin(rad);
-		_sinus[i] = resul*255;
-	}
-
 }
 
 //-----------------------------------------------------------------------------
@@ -42,8 +32,8 @@ BlobsFX::Render( uint32_t* p_bufferStart )
 
 	for(auto& blob : blobs)
 	{
-		blob.x =  _halfWidthScr + (_sinus[( ( _time >> blob.speedScaleX) +  _time )%360]);
-		blob.y =  _halfHeightScr + (_sinus[( ( _time >> blob.speedScaleY) +  _time + 270)%360]);
+		blob.x =  _halfWidthScr + ( _src._colourSinus[( ( _time >> blob.speedScaleX) +  _time ) % _sinusTableIndices]);
+		blob.y =  _halfHeightScr + ( _src._colourSinus[( ( _time >> blob.speedScaleY) +  _time + 270) % _sinusTableIndices ]);
 	}
 
 	for( int y = 0; y < _heightScr ; y++ )

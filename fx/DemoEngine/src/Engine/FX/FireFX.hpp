@@ -9,7 +9,7 @@ class FireFX : public bufferFX
 		std::size_t _jInitPos {};
 
 	public:
-		FireFX( uint32_t p_time ) noexcept;
+		FireFX( uint32_t p_time, DrawerSrc& p_src ) noexcept;
 		~FireFX() = default;
 
 		/**

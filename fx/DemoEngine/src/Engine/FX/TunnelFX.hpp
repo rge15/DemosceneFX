@@ -24,7 +24,7 @@ class TunnelFX : public bufferFX
 
 
 	public:
-		TunnelFX( uint32_t p_time, std::string p_spritePath ) noexcept;
+		TunnelFX( uint32_t p_time, DrawerSrc& p_src, std::string p_spritePath ) noexcept;
 		~TunnelFX() = default;
 
 		/**

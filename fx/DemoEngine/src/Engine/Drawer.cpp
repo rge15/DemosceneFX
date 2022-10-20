@@ -43,7 +43,7 @@ Drawer::updateDraw() noexcept
 TunnelFX&
 Drawer::addTunnelBuffer( uint32_t p_time, std::string p_spriteFile )
 {
-	_FXs.push_back( std::make_unique<TunnelFX>( p_time, p_spriteFile) );
+	_FXs.push_back( std::make_unique<TunnelFX>( p_time, *(_src.get()) , p_spriteFile) );
 
 	auto& buffer =  static_cast<TunnelFX&>( *(_FXs.back().get()) );
 	return buffer;

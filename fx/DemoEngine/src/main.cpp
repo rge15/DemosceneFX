@@ -14,12 +14,12 @@ int main()
 
 	// sprBuffer.setBufferFX( std::make_unique<FireFX>( 10 ) );
 
-	drawer.addBuffer<BlobsFX>( 24 );
-	drawer.addBuffer<MoireFX>( 24 );
-	drawer.addBuffer<MoireTimedFX>( 24 );
-	drawer.addBuffer<MoireExtendFX>( 24 );
+	drawer.addBuffer<PlasmaFX>( 3 );
+	drawer.addTunnelBuffer( 10, "img/tunnel_1.png" );
+	drawer.addBuffer<MoireFX>( 3 );
+	drawer.addBuffer<MoireTimedFX>( 3 );
+	drawer.addBuffer<MoireExtendFX>( 3 );
 	// drawer.addBuffer<PlasmaUpFX>( 10 );
-	// drawer.addTunnelBuffer( 10, "img/tunnel_1.png" );
 
 
 	// TODO 19 OCTUBRE
@@ -29,7 +29,8 @@ int main()
 	//?		- Sprite 1 Tunnel
 	//?		- Sprite 2 Tunnel
 	//?		- Música ?
-	//?		- Hacer un DemoEngineSrc [ Como DemoEngineConfig ] donde meter tablas de sinus y src compartidos
+
+	//?	FOCUUUUUUUUS
 	//?		- Checkear pasar el tiempo del timer en vez de tener una variable _time en cada FX 
 	//?
 	//? [2.4]{SpriteFX} : Se pueden hacer variaciones de este buffer para que tenga un updatePos

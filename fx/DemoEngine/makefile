@@ -19,8 +19,8 @@ ifeq ($(config),DEBUG)
 else ifeq ($(config),RELEASE)
 	CCFLAGS += -o3
 else ifeq ($(config),MEMCHECK)
-	CCFLAGS += -g -fsanitize=address
-	LIBS += -fsanitize=address
+	CCFLAGS += -g -fsanitize=address -fsanitize=undefined
+	LIBS += -fsanitize=address -fsanitize=undefined
 else
 $(error "Invalid configuration $(config)")
 endif

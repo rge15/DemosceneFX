@@ -1,8 +1,8 @@
 #include "SpriteFX.hpp"
 
 
-SpriteFX::SpriteFX( uint32_t p_time ) noexcept
-: bufferFX { p_time }
+SpriteFX::SpriteFX( uint32_t p_time, DrawerSrc& p_src ) noexcept
+: bufferFX { p_time, p_src }
 {
 	Init();
 }

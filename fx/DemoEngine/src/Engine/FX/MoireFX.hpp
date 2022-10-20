@@ -4,11 +4,10 @@
 class MoireFX : public bufferFX
 {
 	private:
-		int _sinus[360];
 		int _time { 0 };
 
 	public:
-		MoireFX( uint32_t p_time ) noexcept;
+		MoireFX( uint32_t p_time, DrawerSrc& p_src ) noexcept;
 		~MoireFX() = default;
 
 		/**
