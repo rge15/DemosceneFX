@@ -6,3 +6,4 @@
 #include <Engine/FX/MoireExtendFX.hpp>
 #include <Engine/FX/BlobsFX.hpp>
 #include <Engine/FX/SpriteFX.hpp>
+#include <Engine/FX/FireUpDownFX.hpp>

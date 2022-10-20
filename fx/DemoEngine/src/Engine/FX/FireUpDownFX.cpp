@@ -1,7 +1,7 @@
-#include "FireFX.hpp"
+#include "FireUpDownFX.hpp"
 
 
-FireFX::FireFX( uint32_t p_time, DrawerSrc& p_src ) noexcept
+FireUpDownFX::FireUpDownFX( uint32_t p_time, DrawerSrc& p_src ) noexcept
 : bufferFX { p_time, p_src }
 {
 	Init();
@@ -11,7 +11,7 @@ FireFX::FireFX( uint32_t p_time, DrawerSrc& p_src ) noexcept
 //-----------------------------------------------------------------------------
 
 void
-FireFX::Init()
+FireUpDownFX::Init()
 {
 	_jInitPos = _widthScr * (_heightScr - 2);
 }
@@ -20,14 +20,14 @@ FireFX::Init()
 //-----------------------------------------------------------------------------
 
 void
-FireFX::Render( uint32_t* p_bufferStart )
+FireUpDownFX::Render( uint32_t* p_bufferStart )
 {
 	uint32_t i { 0 }, fireValue { 0 };
 	uint32_t j = _jInitPos;
-	uint32_t* _ptrScreen = p_bufferStart + _pixelCount - 1;
+	uint32_t* _ptrScreen = (p_bufferStart + _pixelCount - 1) - (_widthScr * _pos);
 	uint32_t rngVal { 0 };
 
-	for(i = _pixelCount ; i > j ; i--)
+	for(i = 0 ; i <= _widthScr ; i++)
 	{
 		//GET RANDOM VALUE
 		rngVal = rand();
@@ -39,7 +39,8 @@ FireFX::Render( uint32_t* p_bufferStart )
 		--_ptrScreen;
 	};
 
-	_ptrScreen = p_bufferStart + _pixelCount - 1;
+	_ptrScreen = (p_bufferStart + _pixelCount - 1) - (_widthScr * _pos);
+	i =  (_pixelCount - 1) - (_widthScr * _pos);
 
 	for( ; i > 0 ; i-- )
 	{
@@ -68,5 +69,43 @@ FireFX::Render( uint32_t* p_bufferStart )
 		--_ptrScreen;
 
 	}
+
+	_ptrScreen = (p_bufferStart + _pixelCount - 1) - (_widthScr * (_pos + 1) );
+	i = (_pixelCount - 1) - (_widthScr * (_pos +1 ));
+
+	for( ; i < _pixelCount ; i++ )
+	{
+		//We get the pointers to the around pixels
+		uint32_t* prev = _ptrScreen-1;
+		uint32_t* next = _ptrScreen+1;
+		uint32_t* below = _ptrScreen+_widthScr;
+
+		//And their value
+		uint32_t prevVal = *prev;
+		uint32_t nextVal = *next;
+		uint32_t belowVal = *below;
+		uint32_t thisVal = *_ptrScreen;
+
+		//We add all the around values and we divide by the number of values added
+		fireValue = thisVal + prevVal + belowVal + nextVal ;
+		fireValue >>= 2;
+
+		fireValue &= 0x00FF0000;
+
+		if(fireValue <= 0x00330000)
+			fireValue = 0;
+
+		*below = fireValue;
+
+		++_ptrScreen;
+
+	}
+
+	if( _pos >= _heightScr-1 )
+		_speedY = -1;
+	else if( _pos <= 1)
+		_speedY = 1;
+	
+	_pos += _speedY;
 
 }

@@ -8,13 +8,15 @@ int main()
 	auto& drawer = engine.getDrawer();
 
 	// auto& sprBuffer = drawer.addBuffer<SpriteFX>( 10 );
-	// auto& spr1 = sprBuffer.addSprite("img/test-1.png", 10);
+	// auto& spr1 = sprBuffer.addSprite("img/prueba.png", 10);
 
 	// spr1.setPos( 100,100 );
 
-	// sprBuffer.setBufferFX( std::make_unique<FireFX>( 10 ) );
+	// sprBuffer.setBufferFX( std::make_unique<FireFX>( 10, *(drawer._src.get()) ) );
 
-	drawer.addBuffer<PlasmaFX>( 3 );
+	// drawer.addBuffer<PlasmaFX>( 3 );
+	drawer.addBuffer<FireUpDownFX>( 20 );
+
 	drawer.addTunnelBuffer( 10, "img/tunnel_1.png" );
 	drawer.addBuffer<MoireFX>( 3 );
 	drawer.addBuffer<MoireTimedFX>( 3 );
@@ -29,11 +31,13 @@ int main()
 	//?		- Sprite 2 Tunnel
 	//?		- Música ?
 
-	//?	FOCUUUUUUUUS
-	//?		- Checkear pasar el tiempo del timer en vez de tener una variable _time en cada FX 
-	//?
 	//? [2.4]{SpriteFX} : Se pueden hacer variaciones de este buffer para que tenga un updatePos
 	//?					que mueva los sprite en forma de sinusoidal o algo
+
+	//? FireUp&Down variation?
+	//? Hacer un bufferFX own?
+
+	//? [Windows?]
 
 	engine.Draw();
 }

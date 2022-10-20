@@ -12,12 +12,13 @@ class Drawer
 	
 		DemoTimer	_timer { 60 };
 		uint32_t&	_buffer;
-		uniqPtr<DrawerSrc> _src = std::make_unique<DrawerSrc>();
 
 		void
 		updateDraw() noexcept;
 
 	public:
+		uniqPtr<DrawerSrc> _src = std::make_unique<DrawerSrc>();
+
 		/**	@brief Constructor of Drawer class
 		 * 
 		 * 	@param p_buffer Pointer to the start of the buffer to draw in

@@ -17,7 +17,7 @@ endif
 ifeq ($(config),DEBUG)
 	CCFLAGS += -g
 else ifeq ($(config),RELEASE)
-	CCFLAGS += -o3
+	CCFLAGS += -O3
 else ifeq ($(config),MEMCHECK)
 	CCFLAGS += -g -fsanitize=address -fsanitize=undefined
 	LIBS += -fsanitize=address -fsanitize=undefined
