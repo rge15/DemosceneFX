@@ -19,7 +19,6 @@ int main()
 	drawer.addBuffer<MoireFX>( 3 );
 	drawer.addBuffer<MoireTimedFX>( 3 );
 	drawer.addBuffer<MoireExtendFX>( 3 );
-	// drawer.addBuffer<PlasmaUpFX>( 10 );
 
 
 	// TODO 19 OCTUBRE
