@@ -65,35 +65,28 @@ void Sprite::fillSpriteData(std::ifstream& p_spriteData) noexcept
 void
 Sprite::Draw( uint32_t* p_buffer, uint32_t p_width, uint32_t p_height  ) noexcept
 {
-	int iStart { 0 }, jStart{ 0 }, iEnd{ _height }, jEnd{ _width };
+	int iStart, jStart, iEnd{ _height }, jEnd{ _width };
 	int i, j;
-	int finalX { _posX }, finalY { _posY };
+	int finalX, finalY;
 
-	if( finalX < 0 )
-	{
-		finalX = 0;
-		jStart = _width + _posX ;
-	}
+	finalX = DemoMath::max<int>( _posX, 0 );
+	finalY = DemoMath::max<int>( _posY, 0 );
 
-	if( finalY < 0 )
-	{
-		finalY = 0;
-		iStart = _height + _posY ;
-	}
-
+	jStart = abs(DemoMath::min<int>( _posX, 0 ));
+	iStart = abs(DemoMath::min<int>( _posY, 0 ));
+	
 	if( finalX + _width > p_width )
-	{
-		iEnd = p_width - finalX;
-	}
+		jEnd = p_width - finalX;
 
 	if( finalY + _height > p_height )
-	{
-		jEnd = p_height - finalY;
-	}
+		iEnd = p_height - finalY;
 
 	for( i = iStart ; i < iEnd ; i++)
 		for( j = jStart ; j< jEnd ; j++)
 			p_buffer[ (finalY + i - iStart) * p_width + (finalX + j - jStart) ] = _data[ i * _width + j];
+
+	_posX += _speedX ;
+	_posY += _speedY ;
 
 }
 
@@ -107,3 +100,12 @@ Sprite::setPos( int p_x, int p_y ) noexcept
 	_posX = p_x;
 }
 
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+
+void
+Sprite::setSpeed( int p_speedX, int p_speedY ) noexcept
+{
+	_speedY = p_speedY;
+	_speedX = p_speedX;
+}

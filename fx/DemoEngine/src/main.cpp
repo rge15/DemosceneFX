@@ -7,14 +7,16 @@ int main()
 	auto& engine = *demoEngine.get();
 	auto& drawer = engine.getDrawer();
 
-	// auto& sprBuffer = drawer.addBuffer<SpriteFX>( 10 );
-	// auto& spr1 = sprBuffer.addSprite("img/prueba.png", 10);
+	auto& sprBuffer = drawer.addBuffer<SpriteFX>( 10 );
+	auto& spr1 = sprBuffer.addSprite("img/B2.png", 10);
 
-	// spr1.setPos( 100,100 );
+	spr1.setPos( 200,100 );
 
-	// sprBuffer.setBufferFX( std::make_unique<FireFX>( 10, *(drawer._src.get()) ) );
+	spr1.setSpeed( 1, 0 );
 
-	// drawer.addBuffer<PlasmaFX>( 3 );
+	sprBuffer.setBufferFX( std::make_unique<FireFX>( 10, *(drawer._src.get()) ) );
+
+	drawer.addBuffer<PlasmaFX>( 3 );
 	drawer.addBuffer<FireUpDownFX>( 20 );
 
 	drawer.addTunnelBuffer( 10, "img/tunnel_1.png" );
