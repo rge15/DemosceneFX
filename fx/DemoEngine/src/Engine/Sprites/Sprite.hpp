@@ -66,4 +66,11 @@ class Sprite
 		*/
 		void
 		Draw( uint32_t* p_buffer, uint32_t p_width, uint32_t p_height ) noexcept;
+
+		/**
+		 * 	@brief Updates the position of the sprite
+		*/
+		void
+		updatePos() noexcept;
+
 };

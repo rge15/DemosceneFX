@@ -8,11 +8,24 @@ int main()
 	auto& drawer = engine.getDrawer();
 
 	auto& sprBuffer = drawer.addBuffer<SpriteFX>( 10 );
-	auto& spr1 = sprBuffer.addSprite("img/B2.png", 10);
+	auto& B1 = sprBuffer.addSprite("img/B2.png", 10);
+	auto& B2 = sprBuffer.addSprite("img/B2.png", 10);
+	auto& Y = sprBuffer.addSprite("img/Y2.png", 10);
+	auto& O = sprBuffer.addSprite("img/O2.png", 10);
 
-	spr1.setPos( 200,100 );
 
-	spr1.setSpeed( 1, 0 );
+	B1.setPos( 200,100 );
+	B1.setSpeed( 1, 0 );
+
+	B2.setPos( 250, 185 );
+	B2.setSpeed( 1, 0 );
+
+	O.setPos( 330, 215 );
+	O.setSpeed( 1, 0 );
+
+	Y.setPos( 381, 200 );
+	Y.setSpeed( 1, 0 );
+
 
 	sprBuffer.setBufferFX( std::make_unique<FireFX>( 10, *(drawer._src.get()) ) );
 
@@ -36,7 +49,6 @@ int main()
 	//? [2.4]{SpriteFX} : Se pueden hacer variaciones de este buffer para que tenga un updatePos
 	//?					que mueva los sprite en forma de sinusoidal o algo
 
-	//? FireUp&Down variation?
 	//? Hacer un bufferFX own?
 
 	//? [Windows?]

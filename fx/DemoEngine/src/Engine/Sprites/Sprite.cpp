@@ -84,10 +84,6 @@ Sprite::Draw( uint32_t* p_buffer, uint32_t p_width, uint32_t p_height  ) noexcep
 	for( i = iStart ; i < iEnd ; i++)
 		for( j = jStart ; j< jEnd ; j++)
 			p_buffer[ (finalY + i - iStart) * p_width + (finalX + j - jStart) ] = _data[ i * _width + j];
-
-	_posX += _speedX ;
-	_posY += _speedY ;
-
 }
 
 //-----------------------------------------------------------------------------
@@ -108,4 +104,14 @@ Sprite::setSpeed( int p_speedX, int p_speedY ) noexcept
 {
 	_speedY = p_speedY;
 	_speedX = p_speedX;
+}
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+
+void
+Sprite::updatePos() noexcept
+{
+	_posX += _speedX ;
+	_posY += _speedY ;
 }

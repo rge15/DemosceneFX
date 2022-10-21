@@ -18,7 +18,6 @@ SpriteFX::Init()
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 
-//TODO : Aqui a veras como haces lo de manejar el tiempo de cada sprite
 void
 SpriteFX::Render( uint32_t* p_bufferStart )
 {
@@ -28,6 +27,7 @@ SpriteFX::Render( uint32_t* p_bufferStart )
 	for( auto& spr : _sprites )
 	{
 		spr._sprite.get()->Draw( p_bufferStart, _widthScr, _heightScr );
+		spr._sprite.get()->updatePos();
 	}
 }
 
