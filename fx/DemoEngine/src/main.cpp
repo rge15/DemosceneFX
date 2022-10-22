@@ -7,32 +7,32 @@ int main()
 	auto& engine = *demoEngine.get();
 	auto& drawer = engine.getDrawer();
 
-	auto& sprBuffer = drawer.addBuffer<SpriteFX>( 10 );
-	auto& B1 = sprBuffer.addSprite("img/B2.png", 10);
-	auto& B2 = sprBuffer.addSprite("img/B2.png", 10);
-	auto& Y = sprBuffer.addSprite("img/Y2.png", 10);
-	auto& O = sprBuffer.addSprite("img/O2.png", 10);
+	// auto& sprBuffer = drawer.addBuffer<SpriteFX>( 10 );
+	// auto& B1 = sprBuffer.addSprite("img/B2.png", 10);
+	// auto& B2 = sprBuffer.addSprite("img/B2.png", 10);
+	// auto& Y = sprBuffer.addSprite("img/Y2.png", 10);
+	// auto& O = sprBuffer.addSprite("img/O2.png", 10);
 
 
-	B1.setPos( 200,100 );
-	B1.setSpeed( 1, 0 );
+	// B1.setPos( 200,100 );
+	// B1.setSpeed( 1, 0 );
 
-	B2.setPos( 250, 185 );
-	B2.setSpeed( 1, 0 );
+	// B2.setPos( 250, 185 );
+	// B2.setSpeed( 1, 0 );
 
-	O.setPos( 330, 215 );
-	O.setSpeed( 1, 0 );
+	// O.setPos( 330, 215 );
+	// O.setSpeed( 1, 0 );
 
-	Y.setPos( 381, 200 );
-	Y.setSpeed( 1, 0 );
+	// Y.setPos( 381, 200 );
+	// Y.setSpeed( 1, 0 );
 
 
-	sprBuffer.setBufferFX( std::make_unique<FireFX>( 10, *(drawer._src.get()) ) );
+	// sprBuffer.setBufferFX( std::make_unique<FireFX>( 10, *(drawer._src.get()) ) );
 
-	drawer.addBuffer<PlasmaFX>( 3 );
-	drawer.addBuffer<FireUpDownFX>( 20 );
+	// drawer.addBuffer<PlasmaFX>( 3 );
+	// drawer.addBuffer<FireUpDownFX>( 20 );
 
-	drawer.addTunnelBuffer( 10, "img/tunnel_1.png" );
+	drawer.addTunnelBuffer( 10, "img/Tunel_1.png" );
 	drawer.addBuffer<MoireFX>( 3 );
 	drawer.addBuffer<MoireTimedFX>( 3 );
 	drawer.addBuffer<MoireExtendFX>( 3 );
@@ -41,13 +41,10 @@ int main()
 	// TODO 19 OCTUBRE
 	//? [1]	: Pasar los otros FX de los efectos y una vez checkear todos hacer otra TODO list de
 	//?		todos los recursos(sprites/logos/música) y optimizaciones que hacer
-	//?		- Sprites MK I
+	//?		- Sprites [Presents MK I]
 	//?		- Sprite 1 Tunnel
 	//?		- Sprite 2 Tunnel
 	//?		- Música ?
-
-	//? [2.4]{SpriteFX} : Se pueden hacer variaciones de este buffer para que tenga un updatePos
-	//?					que mueva los sprite en forma de sinusoidal o algo
 
 	//? Hacer un bufferFX own?
 

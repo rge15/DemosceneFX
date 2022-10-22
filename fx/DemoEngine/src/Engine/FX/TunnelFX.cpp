@@ -43,7 +43,7 @@ TunnelFX::Render( uint32_t* p_bufferStart )
 	float uvx, uvy, shadeValue;
 	int shiftx, shifty, centerx, centery, bufferPos;
 	uint32_t color;
-	uint8_t r,g,b;
+	uint8_t r,g,b,colorShifted;
 
 	shiftx = _widthText * 2 * _time * 1/1000;
 	shifty = _heightText * 0.25 * _time * 1/1000;
@@ -65,9 +65,12 @@ TunnelFX::Render( uint32_t* p_bufferStart )
 			//?Esto se podrá hacer de alguna forma más eficiente?
 			color = _spr.get()->_data[uvy*_widthText + uvx];
 
-			r = (color >> 16) * shadeValue;
-			g = (color >> 8) * shadeValue;
-			b = color * shadeValue;
+			colorShifted = color >> 16; 
+			r = colorShifted * shadeValue;
+			colorShifted = color >> 8;
+			g = colorShifted * shadeValue;
+			colorShifted = color;
+			b = colorShifted * shadeValue;
 
 			color = (r << 16) + (g << 8) + b;
 
