@@ -34,7 +34,7 @@ int main()
 	// O.setPos( 330, 215 );
 	// O.setSpeed( 1, 0 );
 
-	// Y.setPos( 381, 200 );
+	// Y.setPos( 381, 200 );	
 	// Y.setSpeed( 1, 0 );
 
 	// M.setPos( 50, 0 );
@@ -48,8 +48,17 @@ int main()
 	// drawer.addBuffer<PlasmaFX>( 3 );
 	// drawer.addBuffer<FireUpDownFX>( 20 );
 
-	drawer.addTunnelBuffer( 5, "img/tun_1.png" );
-	drawer.addTunnelBuffer( 5, "img/tun_2.png" );
+	// drawer.addTunnelBuffer( 5, "img/tun_1.png" );
+	// drawer.addTunnelBuffer( 5, "img/tun_2.png" );
+	drawer.addTunnelBuffer( 5, "img/tun_3.png" );
+	// drawer.addTunnelBuffer( 5, "img/tun_4.png" );
+	// drawer.addTunnelBuffer( 5, "img/tun_5.png" );
+	// drawer.addTunnelBuffer( 5, "img/tun_5.png" );
+	drawer.addTunnelBuffer( 5, "img/tun_6.png" );
+	// drawer.addTunnelBuffer( 5, "img/tun_7.png" );
+	drawer.addTunnelBuffer( 5, "img/tun_8.png" );
+	// drawer.addTunnelBuffer( 5, "img/tun_9.png" );
+	// drawer.addTunnelBuffer( 5, "img/tun_10.png" );
 	drawer.addBuffer<MoireFX>( 3 );
 	drawer.addBuffer<MoireTimedFX>( 3 );
 	drawer.addBuffer<MoireExtendFX>( 3 );
