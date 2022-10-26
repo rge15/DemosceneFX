@@ -7,11 +7,13 @@
 
 class Drawer
 {
-	private:
+	private:	
+
 		Vector<uniqPtr<bufferFX>> _FXs {};
-	
+
 		DemoTimer	_timer { 60 };
 		uint32_t&	_buffer;
+
 
 		void
 		updateDraw() noexcept;

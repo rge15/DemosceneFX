@@ -7,7 +7,7 @@ int main()
 	auto& engine = *demoEngine.get();
 	auto& drawer = engine.getDrawer();
 
-	auto& sprBuffer = drawer.addBuffer<SpriteFX>( 18 );
+	auto& sprBuffer = drawer.addBuffer<SpriteFX>( 12 ); // 18
 	auto& B1 = sprBuffer.addSprite("img/B.png");
 	auto& B2 = sprBuffer.addSprite("img/B.png");
 	auto& Y = sprBuffer.addSprite("img/Y.png");
@@ -42,21 +42,24 @@ int main()
 
 	sprBuffer.setBufferFX( std::make_unique<FireFX>( 10, *(drawer._src.get()) ) );
 	
+	// drawer.addBuffer<FireFX>( 16 );
 	drawer.addBuffer<FireUpDownFX>( 16 );
-	drawer.addBuffer<PlasmaUpFX>( 20 );
-	drawer.addTunnelBuffer( 20, "img/tun_4.png" );
+	drawer.addBuffer<PlasmaUpFX>( 20 );// 20
+	drawer.addTunnelBuffer( 20, "img/tun_4.png" );// 20
 
-	drawer.addBuffer<PlasmaFX>( 20 );
-	drawer.addTunnelBuffer( 20, "img/tun_6.png" );
+	drawer.addBuffer<PlasmaFX>( 20 );// 20
+	drawer.addTunnelBuffer( 20, "img/tun_6.png" );// 20
 
-	drawer.addBuffer<MoireFX>( 24 );
-	drawer.addBuffer<MoireTimedFX>( 24 );
-	drawer.addBuffer<MoireExtendFX>( 24 );
-	drawer.addTunnelBuffer( 20, "img/tun_8.png" );
+	drawer.addBuffer<MoireFX>( 24 ); // 24
+	drawer.addBuffer<MoireTimedFX>( 24 ); // 24
+	drawer.addBuffer<MoireExtendFX>( 24 ); // 24
+	drawer.addTunnelBuffer( 20, "img/tun_8.png" ); // 20
 	
-	drawer.addBuffer<BlobsFX>( 30 );
+	drawer.addBuffer<BlobsFX>( 30 );//30
 
 	//? [Windows?]
 
 	engine.Draw();
+
+
 }

@@ -23,7 +23,6 @@ void
 FireUpDownFX::Render( uint32_t* p_bufferStart )
 {
 	uint32_t i { 0 }, fireValue { 0 };
-	uint32_t j = _jInitPos;
 	uint32_t* _ptrScreen = (p_bufferStart + _pixelCount - 1) - (_widthScr * _pos);
 	uint32_t rngVal { 0 };
 
@@ -42,7 +41,7 @@ FireUpDownFX::Render( uint32_t* p_bufferStart )
 	_ptrScreen = (p_bufferStart + _pixelCount - 1) - (_widthScr * _pos);
 	i =  (_pixelCount - 1) - (_widthScr * _pos);
 
-	for( ; i > 0 ; i-- )
+	for( ; i >= _widthScr ; i-- )
 	{
 		//We get the pointers to the around pixels
 		uint32_t* prev = _ptrScreen-1;
@@ -73,7 +72,10 @@ FireUpDownFX::Render( uint32_t* p_bufferStart )
 	_ptrScreen = (p_bufferStart + _pixelCount - 1) - (_widthScr * (_pos + 1) );
 	i = (_pixelCount - 1) - (_widthScr * (_pos +1 ));
 
-	for( ; i < _pixelCount ; i++ )
+
+	//TODO : ESto da segv ver pq
+
+	for( ; i <= _pixelCount - _widthScr ; i++ )
 	{
 		//We get the pointers to the around pixels
 		uint32_t* prev = _ptrScreen-1;
@@ -101,11 +103,11 @@ FireUpDownFX::Render( uint32_t* p_bufferStart )
 
 	}
 
-	if( _pos >= _heightScr-1 )
+	if( _pos >= _heightScr-2 )
 		_speedY = -1;
-	else if( _pos <= 1)
+	else if( _pos <= 2)
 		_speedY = 1;
-	
+
 	_pos += _speedY;
 
 }
