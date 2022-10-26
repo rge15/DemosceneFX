@@ -33,7 +33,7 @@ MoireTimedFX::Render( uint32_t* p_bufferStart )
 	uint32_t length, finalCol { 0 };
 
 	p1x = _widthScr/2 + (_sinus[(_time>>2)%360]);
-	p1y = _heightScr/2 + (_sinus[(_time/3)%360]);
+	p1y = _heightScr/2 + (_sinus[(_time)%360]);
 
 	p2x = _widthScr/2 - (_sinus[((_time+270)>>2)%360]);
 	p2y = _heightScr/2 + (_sinus[(_time+270)%360]);
@@ -45,8 +45,8 @@ MoireTimedFX::Render( uint32_t* p_bufferStart )
 		{
 			uvx = j;
 		
-			length = sqrt((uvx-p1x)*(uvx-p1x)+(uvy-p1y)*(uvy-p1y)) + _time;
-			length ^= (uint32_t)(sqrt((uvx-p2x)*(uvx-p2x)+(uvy-p2y)*(uvy-p2y))- _time);
+			length = sqrt((uvx-p1x)*(uvx-p1x)+(uvy-p1y)*(uvy-p1y)) + (_time << 1);
+			length ^= (uint32_t)(sqrt((uvx-p2x)*(uvx-p2x)+(uvy-p2y)*(uvy-p2y))- (_time<<1));
 
 			length >>= 5;
 			length &= 1;

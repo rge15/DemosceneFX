@@ -26,8 +26,8 @@ SpriteFX::Render( uint32_t* p_bufferStart )
 	
 	for( auto& spr : _sprites )
 	{
-		spr._sprite.get()->Draw( p_bufferStart, _widthScr, _heightScr );
-		spr._sprite.get()->updatePos();
+		spr.get()->Draw( p_bufferStart, _widthScr, _heightScr );
+		spr.get()->updatePos();
 	}
 }
 
@@ -35,13 +35,13 @@ SpriteFX::Render( uint32_t* p_bufferStart )
 //-----------------------------------------------------------------------------
 
 Sprite&
-SpriteFX::addSprite( std::string p_filename, int p_time )
+SpriteFX::addSprite( std::string p_filename )
 {
 	auto spr = std::make_unique<Sprite>(p_filename);
 
-	_sprites.push_back( TimedSprite( std::move(spr), p_time ) );
+	_sprites.push_back( std::move(spr) );
 
-	return *(_sprites.back()._sprite.get());
+	return *(_sprites.back().get());
 }
 
 //-----------------------------------------------------------------------------

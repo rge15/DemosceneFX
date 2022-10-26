@@ -24,7 +24,7 @@ MoireFX::Render( uint32_t* p_bufferStart )
 	uint32_t length, finalCol { 0 };
 
 	p1x = _widthScr/2 + ( _src._colourSinus[(_time>>2) % _sinusTableIndices ]);
-	p1y = _heightScr/2 + ( _src._colourSinus[(_time/3) % _sinusTableIndices ]);
+	p1y = _heightScr/2 + ( _src._colourSinus[(_time) % _sinusTableIndices ]);
 
 	p2x = _widthScr/2 - ( _src._colourSinus[((_time+ _cosOffsetTable )>>2) % _sinusTableIndices ]);
 	p2y = _heightScr/2 + ( _src._colourSinus[(_time+ _cosOffsetTable ) % _sinusTableIndices ]);

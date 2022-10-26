@@ -15,7 +15,7 @@ class SpriteFX : public bufferFX
 		};
 		
 		//Manager of TimedSprites
-		Vector<TimedSprite> _sprites {};
+		Vector<uniqPtr<Sprite>> _sprites {};
 		//Manager of the FX to be draw with the sprites
 		uniqPtr<bufferFX> _bufferFX { nullptr };
 
@@ -40,10 +40,9 @@ class SpriteFX : public bufferFX
 		 *	@brief Method thas adds a sprite to the BufferFX 
 		 * 
 		 * 	@param p_filename Path to the image Sprite
-		 * 	@param p_time Lifetime of the sprite ( Currently dissabled )
 		*/		
 		Sprite&
-		addSprite( std::string p_filename, int p_time = 10 );
+		addSprite( std::string p_filename );
 
 		/**
 		 *	@brief Method thas sets a bufferFX to be draw with the sprites 
