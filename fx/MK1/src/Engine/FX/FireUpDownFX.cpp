@@ -72,10 +72,7 @@ FireUpDownFX::Render( uint32_t* p_bufferStart )
 	_ptrScreen = (p_bufferStart + _pixelCount - 1) - (_widthScr * (_pos + 1) );
 	i = (_pixelCount - 1) - (_widthScr * (_pos +1 ));
 
-
-	//TODO : ESto da segv ver pq
-
-	for( ; i <= _pixelCount - _widthScr ; i++ )
+	for( ; i <= _pixelCount - (_widthScr*2) ; i++ )
 	{
 		//We get the pointers to the around pixels
 		uint32_t* prev = _ptrScreen-1;

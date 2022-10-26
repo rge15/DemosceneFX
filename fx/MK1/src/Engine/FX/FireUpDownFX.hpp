@@ -7,7 +7,7 @@ class FireUpDownFX : public bufferFX
 	private:
 		//Heigth pos on the buffer for applying the FIre FX
 		std::size_t _jInitPos {};
-		int _pos { 0 };
+		int _pos { 1 };
 		int _speedY { 1 };
 
 	public:
