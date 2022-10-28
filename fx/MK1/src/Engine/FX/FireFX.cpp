@@ -13,7 +13,6 @@ FireFX::FireFX( uint32_t p_time, DrawerSrc& p_src ) noexcept
 void
 FireFX::Init()
 {
-	_jInitPos = _widthScr * (_heightScr - 2);
 }
 
 //-----------------------------------------------------------------------------
@@ -22,12 +21,11 @@ FireFX::Init()
 void
 FireFX::Render( uint32_t* p_bufferStart )
 {
-	uint32_t i { 0 }, fireValue { 0 };
-	uint32_t j = _jInitPos;
+	uint32_t i { _widthScr }, fireValue { 0 };
 	uint32_t* _ptrScreen = p_bufferStart + _pixelCount - 1;
 	uint32_t rngVal { 0 };
 
-	for(i = _pixelCount ; i > j ; i--)
+	for( ; i > 0 ; i--)
 	{
 		//GET RANDOM VALUE
 		rngVal = rand();
@@ -40,6 +38,8 @@ FireFX::Render( uint32_t* p_bufferStart )
 	};
 
 	_ptrScreen = p_bufferStart + _pixelCount - 1;
+
+	i = _pixelCount - _widthScr;
 
 	for( ; i > 0 ; i-- )
 	{

@@ -6,7 +6,6 @@ class FireFX : public bufferFX
 {
 	private:
 		//Heigth pos on the buffer for applying the FIre FX
-		std::size_t _jInitPos {};
 
 	public:
 		FireFX( uint32_t p_time, DrawerSrc& p_src ) noexcept;

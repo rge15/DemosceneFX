@@ -14,14 +14,14 @@ int main()
 {
 	ptc_open("window", WIDTH_SCREEN, HEIGHT_SCRREN);
 
-	uint32_t i { 0 };
-	uint32_t j = WIDTH_SCREEN * (HEIGHT_SCRREN - 2);
+	uint32_t i { WIDTH_SCREEN };
+	// uint32_t j = WIDTH_SCREEN * (HEIGHT_SCRREN - 2);
 	uint32_t* _ptrScreen = _screen + TOTAL_PIXELS - 1;
 
 	for(;;)
 	{
 		//! BASE LINES VALUE
-		for(i = TOTAL_PIXELS ; i > j ; i--)
+		for(; i > 0 ; i--)
 		{
 			//GET RANDOM VALUE
 			uint32_t rngVal = rand();
@@ -35,6 +35,8 @@ int main()
 
 		//We set the screen pointer to the penultimate last row for setting the values to the next row 
 		_ptrScreen = _screen + TOTAL_PIXELS - 1;
+
+		i = TOTAL_PIXELS - WIDTH_SCREEN;
 
 		//Fire color value
 		uint32_t  fireValue { 0 };

@@ -3,6 +3,13 @@
 
 int main()
 {
+	// MEMORIA
+	// 1º. Desarrollo : Inicio de iteración, desde la primera reunión, objetivos, y pasos
+	// 2º. Marco Teórico : Teoria relativa al proyecto
+	// 2.1º. TEORIA : Demo, intros, historia, mates, FX
+	// 2.2º. ESTADO DEL ARTE : Ver el desarrollo de los puntos teóricos comentados. Como hace la gente hoy lo mismo
+
+	//	TODO : SEE AWESOME CPP REPO y BUSCAR MINIAUDIO-MINIMP3
 	auto demoEngine = std::make_unique<DemoEngine>();
 	auto& engine = *demoEngine.get();
 	auto& drawer = engine.getDrawer();

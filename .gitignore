@@ -38,6 +38,8 @@ sprite
 tunnel
 blobs
 engine
+# MK1
+MK2
 
 # Assembly code
 *.dump
