@@ -6,13 +6,6 @@
 class SpriteFX : public bufferFX
 {
 	public:
-
-		//Struct that contains the sprite and his time to be alive
-		struct TimedSprite
-		{
-			uniqPtr<Sprite> _sprite { nullptr };
-			int				_time { 0 };
-		};
 		
 		//Manager of TimedSprites
 		Vector<uniqPtr<Sprite>> _sprites {};

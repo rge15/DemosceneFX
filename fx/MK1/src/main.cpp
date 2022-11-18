@@ -51,9 +51,9 @@ int main()
 
 	B1.setPos( 720,100 );
 	B1.setSpeed( -2, 0 );
-	I.setPos( 800,120 );
+	I.setPos( 810,120 );
 	I.setSpeed( -2, 0 );
-	T.setPos( 850,120 );
+	T.setPos( 860,120 );
 	T.setSpeed( -2, 0 );
 
 	B2.setPos( -201, 195 );

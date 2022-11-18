@@ -14,7 +14,7 @@ extern "C"
 
 constexpr float PI = 3.14159265359;
 uint32_t _screen[ TOTAL_PIXELS ];
-int _sinus[512];
+int _sinus[360];
 
 struct Blob
 {
@@ -33,12 +33,12 @@ void init()
 		blob.speedScaleY = rand()%4;
 	}
 
-	// 360/512 = 0.703125
+	// 360/360 = 0.703125
 	// 1º = 0.0174533 rad
 	float rad { 0.f }, resul;
-	for(int i = 0; i < 512 ; i++)
+	for(int i = 0; i < 360 ; i++)
 	{
-		rad = (i * 0.703125) * 0.0174533;
+		rad = (i) * 0.0174533;
 		resul = sin(rad);
 		_sinus[i] = resul*255;
 	}
@@ -78,15 +78,15 @@ int main()
 	{
 		for(auto& blob : blobs)
 		{
-			blob.x =  HALF_WIDTH_SCREEN + (_sinus[( (time >> blob.speedScaleX) + time )%512]);
-			blob.y =  HALF_HEIGHT_SCRREN + (_sinus[( (time >> blob.speedScaleY) + time + 381)%512]);
+			blob.x =  HALF_WIDTH_SCREEN + (_sinus[( (time >> blob.speedScaleX) + time )%360]);
+			blob.y =  HALF_HEIGHT_SCRREN + (_sinus[( (time >> blob.speedScaleY) + time + 270)%360]);
 		}
 
 		for(y = 0; y < HEIGHT_SCRREN; y++ )
 		{
 			for(x = 0 ; x < WIDTH_SCREEN; x++)
 			{
-				sumDist = .05;
+				sumDist = 0.005;
 				for(auto& blob : blobs )
 				{
 					dbx = x - blob.x;
@@ -96,11 +96,7 @@ int main()
 					sumDist *= sqrt( dbx + dby );
 				}
 
-				//?Variant I
 				color = max( min( int( floor( sumDist ) ) , 255 ) , 0 );
-				
-				//?Variant II
-				// color = max( min(  5 * int(floor(  sumDist )) , 255 ) , 0 );
 
 				*_ptrScreen = color;
 				++_ptrScreen;

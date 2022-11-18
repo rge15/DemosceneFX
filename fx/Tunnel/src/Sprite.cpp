@@ -4,7 +4,7 @@ Sprite::Sprite( std::string p_fileSrc ) noexcept
 {
 	std::ifstream file ( p_fileSrc, std::ios::binary);
 
-	ASSERT(file.is_open(), "Error opening the img for the sprite")
+	//ASSERT(file.is_open(), "Error opening the img for the sprite")
 
 	fillSpriteData( file );
 }
@@ -38,5 +38,26 @@ void Sprite::fillSpriteData(std::ifstream& p_spriteData) noexcept
 
 	_data.resize( pixels.size()>>2 );
 	memcpy( _data.data(), pixels.data(), pixels.size());
+
+	uint8_t r,g,b;
+	uint32_t value;
+	for( uint32_t i = 0 ; i < height; i++)
+	{
+		for( uint32_t j = 0 ; j < width; j++)
+		{
+			value = _data[i*height+j]; 
+			r = value;
+			value >>= 8;
+			g = value;
+			value >>= 8;
+			b = value;
+			value = r;
+			value <<= 8;
+			value += g;
+			value <<= 8;
+			value += b;
+			_data[i*height+j] = value;
+		}
+	}
 }
 

@@ -1,16 +1,12 @@
 #pragma once
-#include <Engine/FX/bufferFX.hpp>
+
 #include <utilities/alias.hpp>
 #include <Engine/utils/Timer.hpp>
-#include <Engine/FX/TunnelFX.hpp>
 #include <Engine/DrawerSrc.hpp>
 
 class Drawer
 {
-	private:	
-
-		Vector<uniqPtr<bufferFX>> _FXs {};
-
+	private:
 		DemoTimer	_timer { 60 };
 		uint32_t&	_buffer;
 
@@ -34,21 +30,4 @@ class Drawer
 		*/
 		void
 		Draw() noexcept;
-
-		/**
-		 * 	@brief Adds a new bufferFX to be drawn
-		 * 	
-		 * 	@tparam Type of buffer to be created
-		 * 
-		 * 	@param	p_time Time to the bufferFX to be drawn
-		*/
-		template<typename bufferT>
-		bufferT&
-		addBuffer( uint32_t p_time );
-
-		TunnelFX&
-		addTunnelBuffer( uint32_t p_time, std::string p_spriteFile );
-
 };
-
-#include "Drawer.tpp"

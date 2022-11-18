@@ -1,0 +1,11 @@
+--------------- Timer of {Test1} results ---------------
+Max Time : [0.508] , Min Time : [0.499] , Avg Time [0.504]
+Max Time : [0.505] , Min Time : [0.499] , Avg Time [0.502]
+Max Time : [0.515] , Min Time : [0.505] , Avg Time [0.511]
+Max Time : [0.532] , Min Time : [0.501] , Avg Time [0.512]
+Max Time : [0.522] , Min Time : [0.5] , Avg Time [0.51]
+Max Time : [0.516] , Min Time : [0.504] , Avg Time [0.508]
+Max Time : [0.504] , Min Time : [0.495] , Avg Time [0.499]
+Max Time : [0.521] , Min Time : [0.506] , Avg Time [0.511]
+Max Time : [0.521] , Min Time : [0.506] , Avg Time [0.513]
+Max Time : [0.506] , Min Time : [0.499] , Avg Time [0.501]

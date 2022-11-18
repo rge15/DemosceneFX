@@ -32,7 +32,7 @@ void Sprite::fillSpriteData(std::ifstream& p_spriteData) noexcept
 	_width = width;
 	_height = height;
 
-	_data.resize( pixels.size()>>2 );
+	_data.reserve( pixels.size()>>2 );
 	memcpy( _data.data(), pixels.data(), pixels.size());
 
 	uint8_t r,g,b;
@@ -42,8 +42,6 @@ void Sprite::fillSpriteData(std::ifstream& p_spriteData) noexcept
 		for( uint32_t j = 0 ; j < width; j++)
 		{
 			value = _data[i*height+j]; 
-			value <<= 8;
-			value >>= 8;
 			r = value;
 			value >>= 8;
 			g = value;

@@ -40,7 +40,7 @@ auto max(auto val1, auto val2)
 
 int main()
 {
-	ptc_open("window", WIDTH_SCREEN, HEIGHT_SCRREN);
+	ptc_open("Moire", WIDTH_SCREEN, HEIGHT_SCRREN);
 
 	uint32_t i { 0 };
 	uint32_t j { 0 };
@@ -56,11 +56,11 @@ int main()
 	for(;;)
 	{
 		//TODO : Ver de ralentizar la velocidad de las bolas
-		p1x = WIDTH_SCREEN/2 + (_sinus[(time>>2)%512]);
-		p1y = HEIGHT_SCRREN/2 + (_sinus[(time/3)%512]);
+		p1x = WIDTH_SCREEN/3;// + (_sinus[(time>>2)%512]);
+		p1y = HEIGHT_SCRREN/3;// + (_sinus[(time/3)%512]);
 
-		p2x = WIDTH_SCREEN/2 - (_sinus[((time+318)>>2)%512]);
-		p2y = HEIGHT_SCRREN/2 + (_sinus[(time+318)%512]);
+		p2x = WIDTH_SCREEN/2;// - (_sinus[((time+318)>>2)%512]);
+		p2y = HEIGHT_SCRREN/2;// + (_sinus[(time+318)%512]);
 
 
 		for(i = 0; i < HEIGHT_SCRREN; i++ )
@@ -76,18 +76,14 @@ int main()
 				length = sqrt((uvx-p1x)*(uvx-p1x)+(uvy-p1y)*(uvy-p1y));
 				length ^= (uint32_t)(sqrt((uvx-p2x)*(uvx-p2x)+(uvy-p2y)*(uvy-p2y)));
 
-				//?Variation II?
-				// length = sqrt((uvx-p1x)*(uvx-p1x)+(uvy-p1y)*(uvy-p1y)) + time;
-				// length ^= (uint32_t)(sqrt((uvx-p2x)*(uvx-p2x)+(uvy-p2y)*(uvy-p2y))-time);
-
 				//?Colors and displays of the effect
 				//?Variation I?
-				// length >>= 5;
-				// length &= 1;
-				// length *= 255;
+				length >>= 5;
+				length &= 1;
+				length *= 255;
 				
 				//?Variation II?
-				length &= 255;
+				// length &= 255;
 
 				finalCol = (length << 16) + (length << 8) + length;
 

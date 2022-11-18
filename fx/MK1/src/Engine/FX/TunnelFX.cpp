@@ -27,8 +27,8 @@ TunnelFX::Init()
 		for(int x = 0; x < doubleWidth ; x++)
 		{
 			dx = x - _widthScr;
-			distance[y*(_widthScr*2) + x] = int( ratio * _heightText / sqrt( dy*dy + dx*dx ) ) % _heightText;
-			angle[y*(_widthScr*2) + x] = (unsigned int) 2 * _widthText * atan2( dy, dx )/ DemoMath::PI ;
+			distance[y*(_widthScr*2) + x] = int( ratio * _widthText / sqrt( dy*dy + dx*dx ) ) % _widthText;
+			angle[y*(_widthScr*2) + x] = (unsigned int)  2 * _heightText * atan2( dy, dx )/ DemoMath::PI ;
 			shade[y*(_widthScr*2) + x] = DemoMath::min<int>(sqrt( dy * dy + dx * dx ),255.f)/255.;
 		}
 	}
@@ -49,8 +49,8 @@ TunnelFX::Render( uint32_t* p_bufferStart )
 	shifty = _heightText * 0.25 * _time * 1/1000;
 
 	//TODO : ESto habrá q cambiarlo por una tabla de sinus precalculada
-	centerx = _widthScr / 2 + _widthScr / 4 * (sin( _time * 7./1000.));
-	centery = _heightScr / 2 + _heightScr / 3 * (sin( _time * 11./1000.));
+	centerx = _widthScr / 2 + _widthScr / 4 * ( _src._normalizedSinus[ int( _time ) % _sinusTableIndices]);
+	centery = _heightScr / 2 + _heightScr / 3 * ( _src._normalizedSinus[ int( _time*1.2 ) % _sinusTableIndices]);
 
 	for(int i = 0; i < _heightScr; i++)
 	{

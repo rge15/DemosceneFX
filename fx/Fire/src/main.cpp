@@ -3,6 +3,7 @@ extern "C"
 	#include <tinyptc.h>
 }
 #include <cstdint>
+#include <iostream>
 
 #define WIDTH_SCREEN 720
 #define HEIGHT_SCRREN 480
@@ -12,10 +13,9 @@ uint32_t _screen[ TOTAL_PIXELS ];
 
 int main()
 {
-	ptc_open("window", WIDTH_SCREEN, HEIGHT_SCRREN);
+	ptc_open("FireFX", WIDTH_SCREEN, HEIGHT_SCRREN);
 
 	uint32_t i { WIDTH_SCREEN };
-	// uint32_t j = WIDTH_SCREEN * (HEIGHT_SCRREN - 2);
 	uint32_t* _ptrScreen = _screen + TOTAL_PIXELS - 1;
 
 	for(;;)
@@ -29,12 +29,12 @@ int main()
 			//Sets a random default value on RED Channel
 			*_ptrScreen = (rngVal%255)  << 16;
 
-			//We pass inte the prev pixel to set value
+			//We pass into the prev pixel to set value
 			--_ptrScreen;
 		};
 
 		//We set the screen pointer to the penultimate last row for setting the values to the next row 
-		_ptrScreen = _screen + TOTAL_PIXELS - 1;
+		_ptrScreen = _screen + TOTAL_PIXELS - 2;
 
 		i = TOTAL_PIXELS - WIDTH_SCREEN;
 
@@ -63,20 +63,20 @@ int main()
 			// fireValue &= 0x00FFFF00;
 
 			//?VARIANT II?
-			// fireValue &= 0x00FFFF00;
+			fireValue &= 0x00FFFF00;
 
-			// if(fireValue <= 0x00300000)
-				// fireValue = 0;
+			if(fireValue <= 0x00300000)
+				fireValue = 0;
 
 			//?VARIANT III?
 			// if(fireValue <= 0x00300000)
 				// fireValue = 0;
 			
 			//?VARIANT IV? MOST NEARLY TO THE DEMO ORIGINAL ONE
-			fireValue &= 0x00FF0000;
+			// fireValue &= 0x00FF0000;
 
-			if(fireValue <= 0x00330000)
-				fireValue = 0;
+			// if(fireValue <= 0x00330000)
+				// fireValue = 0;
 
 			//?VARIANT V? MOST NEARLY TO THE DEMO ORIGINAL ONE
 			// fireValue &= 0x00FF0000;

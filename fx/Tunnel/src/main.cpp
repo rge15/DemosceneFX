@@ -16,6 +16,7 @@ uint32_t _screen[TOTAL_PIXELS];
 int distance[TOTAL_PIXELS*4];
 int angle[TOTAL_PIXELS*4];
 float shade[TOTAL_PIXELS*4];
+
 int widthText = 0, heightText = 0;
 
 int min( int a, int b)
@@ -39,9 +40,9 @@ void init()
 		for(int x = 0; x < doubleWidth ; x++)
 		{
 			dx = x - WIDTH_SCREEN;
-			distance[y*(WIDTH_SCREEN*2) + x] = int( ratio * heightText / sqrt( dy*dy + dx*dx ) ) % heightText;
-			angle[y*(WIDTH_SCREEN*2) + x] = (unsigned int) 2 * widthText * atan2( dy, dx )/ PI;
-			shade[y*(WIDTH_SCREEN*2) + x] = min(sqrt( dy * dy + dx * dx ),255.)/255.;
+			distance[y*doubleWidth + x] = int( ratio * widthText / sqrt( dy*dy + dx*dx ) ) % widthText;
+			angle[y*doubleWidth + x] = (unsigned int) 2 * heightText * atan2( dy, dx ) / PI;
+			shade[y*doubleWidth + x] = min( sqrt( dy * dy + dx * dx ),100.)/100.;
 		}
 	}
 }
@@ -71,7 +72,7 @@ int main()
 	for(;;)
 	{ 
 		shiftx = widthText * 2 * time * 1/1000;
-		shifty = heightText * 0.25 * time * 1/1000;
+		shifty = heightText * 2 * time * 1/1000;
 
 		//TODO : ESto habrá q cambiarlo por una tabla de sinus precalculada
 		centerx = WIDTH_SCREEN / 2 + WIDTH_SCREEN / 4 * (sin(time*7./1000.));
@@ -85,14 +86,19 @@ int main()
 
 				uvx = (unsigned int)(distance[ bufferPos ] + shiftx) % widthText;
 				uvy = (unsigned int)(angle[ bufferPos ] + shifty) % heightText;
+				
+				
 				shadeValue = shade[ bufferPos ];
 
 				//?Esto se podrá hacer de alguna forma más eficiente?
 				color = spr._data[uvy*widthText + uvx];
 
-				r = (color >> 16) * shadeValue;
-				g = (color >> 8) * shadeValue;
-				b = color * shadeValue;
+				r = (color >> 16);
+				r *= shadeValue;
+				g = (color >> 8);
+				g *= shadeValue;
+				b = color;
+				b *= shadeValue;
 
 				color = (r << 16) + (g << 8) + b;
 

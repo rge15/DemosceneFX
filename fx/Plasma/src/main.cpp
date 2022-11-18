@@ -40,12 +40,12 @@ auto max(auto val1, auto val2)
 
 int main()
 {
-	ptc_open("window", WIDTH_SCREEN, HEIGHT_SCRREN);
+	ptc_open("PlasmaFX", WIDTH_SCREEN, HEIGHT_SCRREN);
 
 	uint32_t i { 0 };
 	uint32_t j { 0 };
 
-	int uvx, uvy, uvy2, uvxtimed, uvytimed;
+	int uvx, uvy, uvxtimed, uvytimed;
 	uint32_t timeInx{0}, timeIny{0}, time{0};
 	
 	uint32_t mod1, mod2, remapUVxtimed, remapUVytimed;
@@ -60,43 +60,35 @@ int main()
 	for(;;)
 	{
 
+		mod1 = timeInx;
+		mod1 %= 360;
+
 		for( i = 0; i< HEIGHT_SCRREN; i++)
 		{
 			uvy = i - HEIGHT_SCRREN/2;
-			uvy2 = i + _sinus[(time+270)%360];
+			uvy += _sinus[(time+270)%360];
 
 			uvytimed = i + timeIny;
-			
-			uvy %= HEIGHT_SCRREN;
 			uvytimed %= HEIGHT_SCRREN;
 
 			remapUVytimed = (uint32_t)remap(uvytimed, HEIGHT_SCRREN, 360 );
 
 			for( j = 0; j < WIDTH_SCREEN; j++)
 			{
-				uvx =  j - WIDTH_SCREEN/3;
-				uvxtimed = (j << 2) + timeInx;
-				
-				uvx %= WIDTH_SCREEN;
-				uvxtimed %= WIDTH_SCREEN;
-				
-				mod1 = uvx * uvx  + uvy * uvy;
-				mod1 *= 1/mod1;
-				mod1 -= timeInx;
-				mod1 %= 360;
-
+				uvx =  j - WIDTH_SCREEN/2;
 				uvx += _sinus[(time)%360];
-				mod2 = sqrt(uvx*uvx+uvy2*uvy2);
+
+				uvxtimed = (j << 2) + timeInx;
+				uvxtimed %= WIDTH_SCREEN;				
+
+				mod2 = sqrt(uvx*uvx+uvy*uvy);
 				mod2 += timeInx + mod2;
 				mod2 %= maxDistScreen;
-
 				mod2 = remap(mod2, maxDistScreen, 360);
 
 				remapUVxtimed = (uint32_t)remap(uvxtimed, WIDTH_SCREEN, 360 );
 
-				//? GOOD VARIATION
-				// value = abs(_sinus[remapUVxtimed] + _sinus[remapUVytimed] + _sinus[mod1] + _sinus[mod2]);
-				value = max( _sinus[remapUVxtimed] + _sinus[remapUVytimed] + _sinus[mod1] + _sinus[mod2],0);
+				value = max(  _sinus[remapUVxtimed] + _sinus[remapUVytimed] + _sinus[mod1] +  _sinus[mod2] ,0);
 				
 				value >>= 1;
 
@@ -109,7 +101,6 @@ int main()
 				value <<= 8;
 				value += valueG;
 				value <<= 8;
-				// value += max(_sinus[(j+timeInx)%360],0);
 
 				_screen[i*WIDTH_SCREEN+j] = value;
 			}
